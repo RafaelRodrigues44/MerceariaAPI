@@ -101,14 +101,14 @@
     Proteção contra vulnerabilidades conhecidas: Implementação de práticas de segurança recomendadas (OWASP).
     Auditoria e registro de atividades sensíveis: Logs de acesso e alterações.
 
-=====================================================================================
+===========================================================================
 
 Este projeto faz parte dos requisitos para aprovação na disciplina de Desenvolvimento Web II 
 do curso de Análise e Desenvolvimento de Sistemas no Senai Gaspar Ricardo Júnior - Sorocaba/SP.
 
 Curso ministrado pelo Prof. Me. André Cassulino. 
 
-====================================================================================
+===========================================================================
 
 Desenvolvimento: Rafael Rodrigues
 - Aluno 3º Semestre de ADS/ 2024
