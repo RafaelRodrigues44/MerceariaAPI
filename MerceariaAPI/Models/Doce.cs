@@ -5,19 +5,17 @@ namespace MerceariaAPI.Models
     public class Doce : Produto
     {
         // Propriedade ID
-        private int id;
+        public new int Id { get; set; }
 
-        // Construtor da classe derivada Doce que chama o construtor da classe base Produto
-        public Doce(int id, string nome, decimal preco, int estoque, DateTime dataFabricacao, DateTime dataValidade, string lote, string fornecedor, string descricao, string tipo)
-            : base(nome, tipo, preco, estoque, dataFabricacao, dataValidade, lote, fornecedor, descricao)
-        {
-            this.id = id;
+        public Doce(){
+            
         }
 
-        // Getter para ID
-        public int Id
+        // Construtor da classe derivada Doce que chama o construtor da classe base Produto
+        public Doce(int id, string nome, string tipo, string descricao)
+            : base(nome, tipo, descricao)
         {
-            get { return id; }
+            this.Id = id;
         }
     }
 }

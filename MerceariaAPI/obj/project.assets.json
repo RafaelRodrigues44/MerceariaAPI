@@ -3023,19 +3023,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rafae\\.nuget\\packages\\": {}
+    "C:\\Users\\Rafael Rodrigues\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
       "projectName": "MerceariaAPI",
-      "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
-      "packagesPath": "C:\\Users\\rafae\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\obj\\",
+      "projectPath": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
+      "packagesPath": "C:\\Users\\Rafael Rodrigues\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rafae\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Rafael Rodrigues\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

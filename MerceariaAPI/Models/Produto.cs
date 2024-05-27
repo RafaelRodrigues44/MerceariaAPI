@@ -1,32 +1,29 @@
-using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MerceariaAPI.Models
 {
     public abstract class Produto
     {
-        // Atributos protegidos para permitir acesso pelas classes derivadas
-        protected string nome;
-        protected string tipo;
-        protected decimal preco;
-        protected int estoque;
-        protected DateTime dataFabricacao;
-        protected DateTime dataValidade;
-        protected string lote;
-        protected string fornecedor;
-        protected string descricao;
+        [Key]
+        public int Id { get; set; }
 
-        // Construtor
-        protected Produto(string nome, string tipo, decimal preco, int estoque, DateTime dataFabricacao, DateTime dataValidade, string lote, string fornecedor, string descricao)
+        public string Nome { get; set; }
+
+        public string Tipo { get; set; }
+
+        public string Descricao { get; set; }
+
+        public Produto()
         {
-            this.nome = nome;
-            this.tipo = tipo;
-            this.preco = preco;
-            this.estoque = estoque;
-            this.dataFabricacao = dataFabricacao;
-            this.dataValidade = dataValidade;
-            this.lote = lote;
-            this.fornecedor = fornecedor;
-            this.descricao = descricao;
+
+        }
+
+        public Produto(string nome, string tipo, string descricao)
+        {
+            Nome = nome;
+            Tipo = tipo;
+            Descricao = descricao;
         }
     }
 }
