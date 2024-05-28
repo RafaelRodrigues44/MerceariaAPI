@@ -38,8 +38,14 @@ namespace MerceariaAPI.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Venda venda)
         {
-            // Aqui você pode implementar a lógica necessária para criar uma nova venda
-            // Por exemplo, validar os dados da venda e salvar no banco de dados
+            if (venda == null)
+            {
+                return BadRequest();
+            }
+
+            // Aqui você pode adicionar a lógica necessária para calcular o total da venda
+            // e validar se os produtos foram fornecidos corretamente
+
             _repository.Add(venda);
             return CreatedAtAction(nameof(GetById), new { id = venda.VendaId }, venda);
         }
@@ -47,13 +53,19 @@ namespace MerceariaAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] Venda venda)
         {
+            if (venda == null || venda.VendaId != id)
+            {
+                return BadRequest();
+            }
+
             var existingVenda = _repository.GetById(id);
             if (existingVenda == null)
             {
                 return NotFound();
             }
-            // Aqui você pode implementar a lógica necessária para atualizar uma venda existente
-            // Por exemplo, validar os dados da venda e atualizar no banco de dados
+
+            // Aqui você pode adicionar a lógica necessária para atualizar a venda
+
             _repository.Update(venda);
             return NoContent();
         }
@@ -66,8 +78,9 @@ namespace MerceariaAPI.Controllers
             {
                 return NotFound();
             }
-            // Aqui você pode implementar a lógica necessária para excluir uma venda
-            // Por exemplo, excluir a venda do banco de dados
+
+            // Aqui você pode adicionar a lógica necessária para excluir a venda
+
             _repository.Delete(venda);
             return NoContent();
         }
