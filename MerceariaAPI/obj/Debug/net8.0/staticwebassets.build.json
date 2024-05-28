@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "KKQaHZXOs5Yv7loLXUzQQfu2k4uOWnKFYE3qznvlglQ=",
+  "Hash": "ovEpCwTGJXq6Nd+WBbeNM2SoRUoNeZsDNPvEIf19BR0=",
   "Source": "MerceariaAPI",
   "BasePath": "_content/MerceariaAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MerceariaAPI\\wwwroot",
+      "Source": "MerceariaAPI",
+      "ContentRoot": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\wwwroot\\",
+      "BasePath": "_content/MerceariaAPI",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

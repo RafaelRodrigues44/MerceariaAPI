@@ -11,7 +11,6 @@ namespace MerceariaAPI.Models
 
         [ForeignKey("TipoProduto")]
         public int TipoProdutoId { get; set; }
-        public TipoProduto TipoProduto { get; set; } // Propriedade de navegação
 
         public string Descricao { get; set; }
 
