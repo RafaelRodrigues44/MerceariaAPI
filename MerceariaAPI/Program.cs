@@ -1,5 +1,10 @@
 using MerceariaAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using MerceariaAPI.Areas.Identity.Models;
+using Microsoft.AspNetCore.Identity;
+using MerceariaAPI.Areas.Identity.Repositories.User;
+using MerceariaAPI.Areas.Identity.Repositories.Role;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +19,20 @@ builder.Services.AddSwaggerGen(c =>
 // Configuração do DbContext e da conexão com o banco de dados SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register IUserRepository and UserRepository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Register IRoleRepository and RoleRepository
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+
+// Register Identity services
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+})
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders(); 
 
 var app = builder.Build();
 

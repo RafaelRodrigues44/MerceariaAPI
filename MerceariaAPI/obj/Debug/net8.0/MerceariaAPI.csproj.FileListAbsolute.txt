@@ -130,12 +130,16 @@ C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\Merce
 C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\ref\MerceariaAPI.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\appsettings.json
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.staticwebassets.runtime.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.exe
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.deps.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.runtimeconfig.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.pdb
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Humanizer.dll
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
@@ -149,6 +153,9 @@ C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Mic
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Sqlite.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\SQLitePCLRaw.batteries_v2.dll
