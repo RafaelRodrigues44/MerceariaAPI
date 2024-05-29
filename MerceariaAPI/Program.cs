@@ -1,11 +1,9 @@
 using MerceariaAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using MerceariaAPI.Areas.Identity.Repositories;
 using MerceariaAPI.Areas.Identity.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using MerceariaAPI.Areas.Identity.Repositories.UserRepository;
+using MerceariaAPI.Areas.Identity.Repositories.User;
+using MerceariaAPI.Areas.Identity.Repositories.Role;
 
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,110 +1,69 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using MerceariaAPI.Areas.Identity.Models;
-using System;
+using MerceariaAPI.Areas.Identity.Repositories.User;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using MerceariaAPI.Areas.Identity.Repositories.UserRepository;
 
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ApplicationUserController : ControllerBase
     {
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ApplicationUserController(UserRepository userRepository)
+        public ApplicationUserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        // GET: api/Usuarios
         [HttpGet]
-        public async Task<IActionResult> GetUsuarios()
+        public async Task<IEnumerable<ApplicationUser>> GetUsers()
         {
-            var usuarios = await _userRepository.GetUsers();
-            return Ok(usuarios);
+            return await _userRepository.GetUsers();
         }
 
-        // GET: api/Usuarios/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUsuario(string id)
+        public async Task<ActionResult<ApplicationUser>> GetUserById(string id)
         {
-            var usuario = await _userRepository.GetUserById(id);
-
-            if (usuario == null)
+            var user = await _userRepository.GetUserById(id);
+            if (user == null)
             {
                 return NotFound();
             }
-
-            return Ok(usuario);
+            return user;
         }
 
-        // POST: api/Usuarios
         [HttpPost]
-        public async Task<IActionResult> PostUsuario(ApplicationUser usuario)
+        public async Task<ActionResult<ApplicationUser>> CreateUser([FromBody] ApplicationUser user)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                await _userRepository.CreateUser(usuario);
-                return CreatedAtAction(nameof(GetUsuario), new { id = usuario.Id }, usuario);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
-            }
+            await _userRepository.CreateUser(user);
+            return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
         }
 
-        // PUT: api/Usuarios/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(string id, ApplicationUser usuario)
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] ApplicationUser user)
         {
-            if (id != usuario.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                await _userRepository.UpdateUser(usuario);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
-            }
+            await _userRepository.UpdateUser(user);
+            return NoContent();
         }
 
-        // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario(string id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
-            var usuario = await _userRepository.GetUserById(id);
-
-            if (usuario == null)
+            var user = await _userRepository.GetUserById(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            try
-            {
-                await _userRepository.DeleteUser(usuario);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
-            }
+            await _userRepository.DeleteUser(user);
+            return NoContent();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using MerceariaAPI.Areas.Identity.Models;
 
-namespace MerceariaAPI.Areas.Identity.Repositories.UserRepository
+namespace MerceariaAPI.Areas.Identity.Repositories.User
 {
     public class UserRepository : IUserRepository
     {

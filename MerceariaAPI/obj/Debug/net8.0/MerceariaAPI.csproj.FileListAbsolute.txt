@@ -128,14 +128,6 @@ C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\refin
 C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.pdb
 C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.genruntimeconfig.cache
 C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\ref\MerceariaAPI.dll
-C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.csproj.AssemblyReference.cache
-C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.AssemblyInfoInputs.cache
-C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.AssemblyInfo.cs
-C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.csproj.CoreCompileInputs.cache
-C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.sourcelink.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\appsettings.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.staticwebassets.runtime.json
@@ -250,6 +242,14 @@ C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\run
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.csproj.AssemblyReference.cache
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.AssemblyInfoInputs.cache
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.AssemblyInfo.cs
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.csproj.CoreCompileInputs.cache
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\MerceariaAPI.sourcelink.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\staticwebassets\msbuild.MerceariaAPI.Microsoft.AspNetCore.StaticWebAssets.props

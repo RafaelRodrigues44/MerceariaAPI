@@ -5,7 +5,7 @@ using MerceariaAPI.Areas.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace MerceariaAPI.Areas.Identity.Repositories
+namespace MerceariaAPI.Areas.Identity.Repositories.Role
 {
     public class RoleRepository : IRoleRepository
     {

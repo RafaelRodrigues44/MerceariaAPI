@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MerceariaAPI.Areas.Identity.Models;
-using MerceariaAPI.Areas.Identity.Repositories;
+using MerceariaAPI.Areas.Identity.Repositories.Role;
 using System;
 using System.Threading.Tasks;
 
