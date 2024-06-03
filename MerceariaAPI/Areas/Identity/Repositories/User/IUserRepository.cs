@@ -12,5 +12,6 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
         Task CreateUser(ApplicationUser user);
         Task UpdateUser(ApplicationUser user);
         Task DeleteUser(ApplicationUser user);
+        Task<bool> CheckPasswordAsync(ApplicationUser user, string password);
     }
 }

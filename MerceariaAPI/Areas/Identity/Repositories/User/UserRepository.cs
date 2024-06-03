@@ -29,6 +29,18 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
             await _userManager.CreateAsync(user);
         }
 
+        public async Task CreateUser(ApplicationUser user, string password)
+        {
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (!result.Succeeded)
+            {
+                // Trate os erros de criação de usuário, se necessário
+                // Por exemplo, se houver violações de regras de senha
+                // Você pode acessar os erros em result.Errors
+            }
+        }
+
         public async Task UpdateUser(ApplicationUser user)
         {
             await _userManager.UpdateAsync(user);
@@ -37,6 +49,22 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
         public async Task DeleteUser(ApplicationUser user)
         {
             await _userManager.DeleteAsync(user);
+        }
+
+        public async Task<ApplicationUser> GetUserByUsername(string username)
+        {
+            return await _userManager.FindByNameAsync(username);
+        }
+
+        public async Task<ApplicationUser> GetUserByEmail(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
+
+
+        public async Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
+        {
+            return await _userManager.CheckPasswordAsync(user, password);
         }
     }
 }

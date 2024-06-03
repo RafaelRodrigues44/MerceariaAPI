@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj": {}
+    "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj": {
+    "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
+        "projectUniqueName": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
         "projectName": "MerceariaAPI",
-        "projectPath": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
-        "packagesPath": "C:\\Users\\Rafael Rodrigues\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\obj\\",
+        "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
+        "packagesPath": "C:\\Users\\rafae\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Rafael Rodrigues\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\rafae\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -43,6 +43,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
               "version": "[2.2.0, )"
