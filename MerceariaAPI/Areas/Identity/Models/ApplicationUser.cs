@@ -7,7 +7,7 @@ namespace MerceariaAPI.Areas.Identity.Models
     {
     }
 
-    // Modelo para representar uma função de usuário
+    // Modelo para representar uma função de supersuário
     public class ApplicationRole : IdentityRole
     {
     }

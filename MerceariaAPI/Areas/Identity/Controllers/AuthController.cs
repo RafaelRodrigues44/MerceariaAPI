@@ -35,36 +35,29 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            _logger.LogInformation("Login attempt for user: {Username}", model.Username);
-
-            // Obtenha as credenciais de login do repositório
             var (username, passwordHash) = await _userRepository.GetLoginCredentials(model.Username);
 
             if (username == null || passwordHash == null)
             {
-                _logger.LogWarning("User not found: {Username}", model.Username);
                 return Unauthorized("User not found.");
             }
 
-            // Cria uma instância ApplicationUser com o nome de usuário e a senha
             var user = new ApplicationUser { UserName = username, PasswordHash = passwordHash };
 
-            // Verifica se a senha fornecida corresponde à senha armazenada no banco de dados
-            var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
-            _logger.LogInformation("Password: {Password}", model.Password);
+            var passwordMatched = await _userRepository.CheckPasswordAsync(user, model.Password);
 
-            if (!result.Succeeded)
+            if (passwordMatched)
             {
-                _logger.LogWarning("Invalid password for user: {Username}", model.Username);
-                _logger.LogWarning("Hash of user: {PasswordHash}", passwordHash);
-                return Unauthorized("Invalid password.");
+                _logger.LogInformation("Password matched for user {Username}", username);
+
+                var token = GenerateJwtToken(username);
+                return Ok(new { token });
             }
 
-            var token = GenerateJwtToken(username);
-            _logger.LogInformation("Login successful for user: {Username}", model.Username);
-            return Ok(new { token });
-        }
+            _logger.LogInformation("Password mismatch for user {Username}", username);
 
+            return Unauthorized("Login or Password invalid!");
+        }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()

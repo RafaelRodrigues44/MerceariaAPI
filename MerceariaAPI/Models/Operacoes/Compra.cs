@@ -14,7 +14,7 @@ namespace MerceariaAPI.Models
         public string Vendedor { get; set; }
         public string Transportadora { get; set; }
         public decimal PrecoCompra { get; set; }
-        public decimal PrecoVenda { get; set; } // Adicionando propriedade para o preço de venda
+        public decimal PrecoVenda { get; set; }
 
         // Lista de produtos comprados nesta compra
         public List<Produto> Produtos { get; set; }

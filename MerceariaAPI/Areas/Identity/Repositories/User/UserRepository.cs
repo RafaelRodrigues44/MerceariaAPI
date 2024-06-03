@@ -56,14 +56,14 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
         }
 
         public async Task<(string username, string passwordHash)> GetLoginCredentials(string username)
-{
-        var user = await _userManager.FindByNameAsync(username);
-        if (user == null)
         {
-            return (null, null);
+                var user = await _userManager.FindByNameAsync(username);
+                if (user == null)
+                {
+                    return (null, null);
+                }
+                return (user.UserName, user.PasswordHash);
         }
-        return (user.UserName, user.PasswordHash);
-}
 
     }
 }
