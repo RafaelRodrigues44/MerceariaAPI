@@ -35,11 +35,17 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ApplicationUser>> CreateUser([FromBody] ApplicationUser user)
+        public async Task<ActionResult<ApplicationUser>> CreateUser([FromBody] RegisterModel model)
         {
-            await _userRepository.CreateUser(user);
+            var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+            var result = await _userRepository.CreateUser(user, model.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
             return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(string id, [FromBody] ApplicationUser user)
@@ -66,4 +72,12 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return NoContent();
         }
     }
+
+         public class RegisterModel
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
 }

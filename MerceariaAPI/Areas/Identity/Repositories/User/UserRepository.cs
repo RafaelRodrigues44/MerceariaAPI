@@ -24,21 +24,10 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
             return await _userManager.FindByIdAsync(id);
         }
 
-        public async Task CreateUser(ApplicationUser user)
-        {
-            await _userManager.CreateAsync(user);
-        }
-
-        public async Task CreateUser(ApplicationUser user, string password)
+        public async Task<IdentityResult> CreateUser(ApplicationUser user, string password) // Alterado aqui
         {
             var result = await _userManager.CreateAsync(user, password);
-
-            if (!result.Succeeded)
-            {
-                // Trate os erros de criação de usuário, se necessário
-                // Por exemplo, se houver violações de regras de senha
-                // Você pode acessar os erros em result.Errors
-            }
+            return result;
         }
 
         public async Task UpdateUser(ApplicationUser user)
@@ -61,10 +50,20 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
             return await _userManager.FindByEmailAsync(email);
         }
 
-
         public async Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
         {
             return await _userManager.CheckPasswordAsync(user, password);
         }
+
+        public async Task<(string username, string passwordHash)> GetLoginCredentials(string username)
+{
+        var user = await _userManager.FindByNameAsync(username);
+        if (user == null)
+        {
+            return (null, null);
+        }
+        return (user.UserName, user.PasswordHash);
+}
+
     }
 }

@@ -1,7 +1,7 @@
 using MerceariaAPI.Areas.Identity.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 
 namespace MerceariaAPI.Areas.Identity.Repositories.User
 {
@@ -9,9 +9,10 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
     {
         Task<IEnumerable<ApplicationUser>> GetUsers();
         Task<ApplicationUser> GetUserById(string id);
-        Task CreateUser(ApplicationUser user);
+        Task<IdentityResult> CreateUser(ApplicationUser user, string password);
         Task UpdateUser(ApplicationUser user);
         Task DeleteUser(ApplicationUser user);
         Task<bool> CheckPasswordAsync(ApplicationUser user, string password);
+        Task<(string username, string passwordHash)> GetLoginCredentials(string username);
     }
 }
