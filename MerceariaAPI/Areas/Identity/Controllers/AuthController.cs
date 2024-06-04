@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using MerceariaAPI.Areas.Identity.Models;
 using Microsoft.Extensions.Logging;
 using MerceariaAPI.Areas.Identity.Repositories.User;
+using MerceariaAPI.Areas.Identity.Repositories.Role;
 
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
@@ -22,14 +23,16 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         private readonly IConfiguration _configuration;
         private readonly ILogger<AuthController> _logger;
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
 
-        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, ILogger<AuthController> logger, IUserRepository userRepository)
+        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, ILogger<AuthController> logger, IUserRepository userRepository, IRoleRepository roleRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _logger = logger;
             _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
 
         [HttpPost("login")]
@@ -50,7 +53,8 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             {
                 _logger.LogInformation("Password matched for user {Username}", username);
 
-                var token = GenerateJwtToken(username);
+                var roles = await _userManager.GetRolesAsync(user);
+                var token = GenerateJwtToken(username, roles);
                 return Ok(new { token });
             }
 
@@ -66,14 +70,67 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return Ok();
         }
 
-        private string GenerateJwtToken(string username)
+        [HttpPost("assign-role")]
+        public async Task<IActionResult> AssignRole([FromBody] AssignRoleModel model)
         {
-            var claims = new[]
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var role = await _roleRepository.GetRoleByName(model.RoleName);
+            if (role == null)
+            {
+                return NotFound("Role not found.");
+            }
+
+            var result = await _userManager.AddToRoleAsync(user, model.RoleName);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("remove-role")]
+        public async Task<IActionResult> RemoveRole([FromBody] AssignRoleModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var role = await _roleRepository.GetRoleByName(model.RoleName);
+            if (role == null)
+            {
+                return NotFound("Role not found.");
+            }
+
+            var result = await _userManager.RemoveFromRoleAsync(user, model.RoleName);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+        }
+
+        private string GenerateJwtToken(string username, IList<string> roles)
+        {
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, username)
             };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -87,11 +144,20 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-    }
 
-    public class LoginModel
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public class LoginModel
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
+        }
+        public class AssignRoleModel
+        {
+            public string Username { get; set; }
+            public string RoleName { get; set; }
+        }
     }
 }
+
+
+
+

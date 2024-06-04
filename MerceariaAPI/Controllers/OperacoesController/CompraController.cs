@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MerceariaAPI.Models;
 using MerceariaAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerceariaAPI.Controllers
 {

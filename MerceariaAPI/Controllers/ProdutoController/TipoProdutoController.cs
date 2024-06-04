@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MerceariaAPI.Data;
 using MerceariaAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerceariaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TipoProdutosController : ControllerBase
     {
         private readonly AppDbContext _context;

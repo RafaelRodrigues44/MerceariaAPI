@@ -1,5 +1,9 @@
-using MerceariaAPI.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using MerceariaAPI.Data;
 using MerceariaAPI.Areas.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using MerceariaAPI.Areas.Identity.Repositories.User;
@@ -10,6 +14,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuração dos serviços
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -18,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
@@ -60,6 +66,9 @@ builder.Services.AddLogging(logging =>
     logging.AddDebug();
 });
 
+// Adicionando suporte para Views
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -76,11 +85,18 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+// Configuração para suporte a visualizações (templates)
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+// Adicionando a configuração para carregar a view index.html ao acessar o root da aplicação
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Index}/{action=Index}/{id?}");
+    endpoints.MapControllers();
+});
 
 app.Run();

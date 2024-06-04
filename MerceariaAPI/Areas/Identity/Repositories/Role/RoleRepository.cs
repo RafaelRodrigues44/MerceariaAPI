@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MerceariaAPI.Areas.Identity.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using MerceariaAPI.Areas.Identity.Models;
 
 namespace MerceariaAPI.Areas.Identity.Repositories.Role
 {
@@ -13,12 +11,12 @@ namespace MerceariaAPI.Areas.Identity.Repositories.Role
 
         public RoleRepository(RoleManager<ApplicationRole> roleManager)
         {
-            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
+            _roleManager = roleManager;
         }
 
         public async Task<IEnumerable<ApplicationRole>> GetRoles()
         {
-            return await Task.FromResult(await _roleManager.Roles.ToListAsync());
+            return await Task.FromResult(_roleManager.Roles);
         }
 
         public async Task<ApplicationRole> GetRoleById(string id)
@@ -26,33 +24,23 @@ namespace MerceariaAPI.Areas.Identity.Repositories.Role
             return await _roleManager.FindByIdAsync(id);
         }
 
+        public async Task<ApplicationRole> GetRoleByName(string roleName)
+        {
+            return await _roleManager.FindByNameAsync(roleName);
+        }
+
         public async Task CreateRole(ApplicationRole role)
         {
-            if (role == null)
-            {
-                throw new ArgumentNullException(nameof(role));
-            }
-
             await _roleManager.CreateAsync(role);
         }
 
         public async Task UpdateRole(ApplicationRole role)
         {
-            if (role == null)
-            {
-                throw new ArgumentNullException(nameof(role));
-            }
-
             await _roleManager.UpdateAsync(role);
         }
 
         public async Task DeleteRole(ApplicationRole role)
         {
-            if (role == null)
-            {
-                throw new ArgumentNullException(nameof(role));
-            }
-
             await _roleManager.DeleteAsync(role);
         }
     }
