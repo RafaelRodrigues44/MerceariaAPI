@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Minha Aplicação</title>
+    <title>MerceariaAPI</title>
     <!-- Adicione os links para os arquivos de estilo CSS aqui -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Adicione o seu CSS personalizado aqui -->
@@ -14,7 +14,7 @@
         <!-- Cabeçalho (Header) -->
         <header class="row bg-dark text-light p-3">
             <div class="col">
-                <h1>Minha Aplicação</h1>
+                <h1><span id="tituloPagina">Título da Página</span></h1>
             </div>
         </header>
 
@@ -29,11 +29,8 @@
             <!-- Área de Conteúdo -->
             <section class="col-md-9">
                 <h2>Conteúdo</h2>
-                <!-- Aqui será renderizado o conteúdo da API -->
-                <div id="conteudo">
-                    <!-- O conteúdo será renderizado aqui -->
-                    <h1>Hello World!</h1>
-                </div>
+                <!-- Aqui será renderizado o conteúdo específico de cada página -->
+                @RenderBody()
             </section>
         </main>
 
@@ -51,4 +48,13 @@
     <!-- Adicione o seu JavaScript personalizado aqui -->
     <script src="~/js/scripts.js"></script>
 </body>
+<script>
+  // Defina o título inicial (opcional)
+  document.getElementById("tituloPagina").textContent = "Título Inicial";
+
+  // Função para atualizar o título dinamicamente (você pode chamar essa função quando necessário)
+  function atualizarTitulo(novoTitulo) {
+    document.getElementById("tituloPagina").textContent = novoTitulo;
+  }
+</script>
 </html>
