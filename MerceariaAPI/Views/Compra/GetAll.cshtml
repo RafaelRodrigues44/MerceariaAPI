@@ -1,0 +1,47 @@
+@model IEnumerable<MerceariaAPI.Models.Compra>
+
+@{
+    ViewData["Title"] = "Todas as Compras";
+}
+
+<h2>Todas as Compras</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Data da Compra</th>
+            <th>Lote</th>
+            <th>Data de Fabricação</th>
+            <th>Data de Validade</th>
+            <th>Fabricante</th>
+            <th>Vendedor</th>
+            <th>Transportadora</th>
+            <th>Preço de Compra</th>
+            <th>Preço de Venda</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var compra in Model)
+        {
+            <tr>
+                <td>@compra.CompraId</td>
+                <td>@compra.DataCompra.ToShortDateString()</td>
+                <td>@compra.Lote</td>
+                <td>@compra.DataFabricacao.ToShortDateString()</td>
+                <td>@compra.DataValidade.ToShortDateString()</td>
+                <td>@compra.Fabricante</td>
+                <td>@compra.Vendedor</td>
+                <td>@compra.Transportadora</td>
+                <td>@compra.PrecoCompra.ToString("C")</td>
+                <td>@compra.PrecoVenda.ToString("C")</td>
+                <td>
+                    <a href="/Compra/GetById/@compra.CompraId" class="btn btn-info">Detalhes</a>
+                    <a href="/Compra/Edit/@compra.CompraId" class="btn btn-warning">Editar</a>
+                    <a href="/Compra/Delete/@compra.CompraId" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

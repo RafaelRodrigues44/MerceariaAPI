@@ -1,0 +1,57 @@
+@model MerceariaAPI.Models.Compra
+
+@{
+    ViewData["Title"] = "Detalhes da Compra";
+}
+
+<h2>Detalhes da Compra</h2>
+
+<div>
+    <h4>Compra</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">@Model.CompraId</dd>
+        
+        <dt class="col-sm-2">Data da Compra</dt>
+        <dd class="col-sm-10">@Model.DataCompra.ToShortDateString()</dd>
+        
+        <dt class="col-sm-2">Lote</dt>
+        <dd class="col-sm-10">@Model.Lote</dd>
+        
+        <dt class="col-sm-2">Data de Fabricação</dt>
+        <dd class="col-sm-10">@Model.DataFabricacao.ToShortDateString()</dd>
+        
+        <dt class="col-sm-2">Data de Validade</dt>
+        <dd class="col-sm-10">@Model.DataValidade.ToShortDateString()</dd>
+        
+        <dt class="col-sm-2">Fabricante</dt>
+        <dd class="col-sm-10">@Model.Fabricante</dd>
+        
+        <dt class="col-sm-2">Vendedor</dt>
+        <dd class="col-sm-10">@Model.Vendedor</dd>
+        
+        <dt class="col-sm-2">Transportadora</dt>
+        <dd class="col-sm-10">@Model.Transportadora</dd>
+        
+        <dt class="col-sm-2">Preço de Compra</dt>
+        <dd class="col-sm-10">@Model.PrecoCompra.ToString("C")</dd>
+        
+        <dt class="col-sm-2">Preço de Venda</dt>
+        <dd class="col-sm-10">@Model.PrecoVenda.ToString("C")</dd>
+        
+        <dt class="col-sm-2">Produtos</dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (var produto in Model.Produtos)
+                {
+                    <li>@produto.Nome - @produto.Descricao</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a href="/Compra/Edit/@Model.CompraId" class="btn btn-warning">Editar</a>
+    <a href="/Compra" class="btn btn-secondary">Voltar</a>
+</div>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MerceariaAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bff215cecebb437a1be92f5ce20f231c38090d92")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85ef103024d549461660e38d4d895abd7d11e18e")]
 [assembly: System.Reflection.AssemblyProductAttribute("MerceariaAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MerceariaAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

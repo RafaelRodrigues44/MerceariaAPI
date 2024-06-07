@@ -144,6 +144,8 @@ C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\Merce
 C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\obj\Debug\net8.0\ref\MerceariaAPI.dll
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\appsettings.json
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\package-lock.json
+C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\package.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.staticwebassets.runtime.json
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.exe
 C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\bin\Debug\net8.0\MerceariaAPI.deps.json

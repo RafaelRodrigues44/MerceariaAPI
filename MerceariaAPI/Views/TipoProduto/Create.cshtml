@@ -1,0 +1,19 @@
+@model MerceariaAPI.Models.TipoProduto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Criar Novo Tipo de Produto</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label for="Nome">Nome:</label>
+        <input type="text" id="Nome" name="Nome" required />
+    </div>
+    <div>
+        <button type="submit">Salvar</button>
+    </div>
+</form>
+
+<a href="/TipoProdutoMvc/List">Voltar para a Lista</a>

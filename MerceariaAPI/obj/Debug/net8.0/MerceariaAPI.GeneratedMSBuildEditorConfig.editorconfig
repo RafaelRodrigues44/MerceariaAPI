@@ -18,10 +18,42 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXEdldEFsbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/GetById.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXEdldEJ5SWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1dG9cQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1dG9cRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1dG9cTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
