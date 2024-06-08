@@ -1,79 +1,150 @@
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MerceariaAPI.Data;
 using MerceariaAPI.Models;
-using MerceariaAPI.Repositories;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MerceariaAPI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CompraController : ControllerBase
+    public class CompraController : Controller
     {
-        private readonly IRepository<Compra> _repository;
+        private readonly AppDbContext _context;
 
-        public CompraController(IRepository<Compra> repository)
+        public CompraController(AppDbContext context)
         {
-            _repository = repository;
+            _context = context;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        // GET: /Compra/List
+        public async Task<IActionResult> List()
         {
-            var compras = _repository.GetAll();
-            return Ok(compras);
+            var compras = await _context.Compras.ToListAsync();
+            return View("/Views/Compra/List.cshtml", compras);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        // GET: /Compra/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var compra = _repository.GetById(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var compra = await _context.Compras
+                .FirstOrDefaultAsync(m => m.CompraId == id);
             if (compra == null)
             {
                 return NotFound();
             }
-            return Ok(compra);
+
+            return View(compra);
         }
 
+        // GET: /Compra/Create
+        public IActionResult Create()
+        {
+            ViewBag.Produtos = _context.Produtos.ToList(); // Carrega a lista de produtos disponíveis
+            return View("/Views/Compra/Create.cshtml");
+        }
+
+        // POST: /Compra/Create
         [HttpPost]
-        public IActionResult Create([FromBody] Compra compra)
+        public async Task<IActionResult> Create([Bind("DataCompra, Lote, DataFabricacao, DataValidade, Fabricante, Vendedor, Transportadora, PrecoCompra, PrecoVenda")] Compra compra, int[] produtosSelecionados)
         {
-            if (compra == null)
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+                // Adicione a lógica para salvar a compra e os produtos selecionados aqui
+                _context.Add(compra);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(List));
             }
-            _repository.Add(compra);
-            return CreatedAtAction(nameof(GetById), new { id = compra.CompraId }, compra);
+            ViewBag.Produtos = _context.Produtos.ToList(); // Carrega novamente a lista de produtos disponíveis em caso de falha de validação
+            return View("/Views/Compra/Create.cshtml", compra);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Compra compra)
+        // GET: /Compra/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            if (compra == null || compra.CompraId != id)
-            {
-                return BadRequest();
-            }
-
-            var existingCompra = _repository.GetById(id);
-            if (existingCompra == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            _repository.Update(compra);
-            return NoContent();
+            var compra = await _context.Compras.FindAsync(id);
+            if (compra == null)
+            {
+                return NotFound();
+            }
+            return View("/Views/Compra/Edit.cshtml", compra);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        // POST: /Compra/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("CompraId, DataCompra, Lote, DataFabricacao, DataValidade, Fabricante, Vendedor, Transportadora, PrecoCompra, PrecoVenda")] Compra compra)
         {
-            var compra = _repository.GetById(id);
+            if (id != compra.CompraId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(compra);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CompraExists(compra.CompraId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(List));
+            }
+            return View("/Views/Compra/Edit.cshtml", compra);
+        }
+
+        // GET: /Compra/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var compra = await _context.Compras
+                .FirstOrDefaultAsync(m => m.CompraId == id);
             if (compra == null)
             {
                 return NotFound();
             }
 
-            _repository.Delete(compra);
-            return NoContent();
+            return View(compra);
+        }
+
+        // POST: /Compra/Delete/5
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var compra = await _context.Compras.FindAsync(id);
+            #pragma warning disable CS8604 // Possible null reference argument.
+            _context.Compras.Remove(compra);
+            #pragma warning restore CS8604 // Possible null reference argument.
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
+
+        private bool CompraExists(int id)
+        {
+            return _context.Compras.Any(e => e.CompraId == id);
         }
     }
 }

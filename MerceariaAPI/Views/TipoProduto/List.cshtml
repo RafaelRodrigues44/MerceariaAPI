@@ -22,9 +22,7 @@
                 <td>@item.Nome</td>
                 <td>
                     <a href="/TipoProduto/Edit/@item.Id">Editar</a> |
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="delete" style="display:inline;">
-                        <button type="submit">Deletar</button>
-                    </form>
+                    <a href="/TipoProduto/Delete/@item.Id">Excluir</a> |                   
                 </td>
             </tr>
         }

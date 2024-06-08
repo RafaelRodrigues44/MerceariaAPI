@@ -1,0 +1,36 @@
+@model IEnumerable<MerceariaAPI.Models.Produto>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Produtos</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>TipoProdutoId</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Nome</td>
+                <td>@item.TipoProdutoId</td>
+                <td>@item.Descricao</td>
+                <td>
+                    <a href="/Produto/Edit/@item.Id">Editar</a> |
+                    <a href="/Produto/Delete/@item.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Produto/Create">Adicionar</a>

@@ -46,11 +46,11 @@
             display: none;
             background-color: #495057;
             position: absolute;
-            top: 50px; /* Ajustado para aparecer abaixo do item de menu */
+            top: 50px; 
             left: 100%;
             width: 150px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adicionado sombra */
-            z-index: 1; /* Garante que o submenu esteja acima de outros elementos */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1; 
         }
         .submenu a {
             display: block;
@@ -79,6 +79,18 @@
             <a href="/TipoProduto/List">Listar</a>
             <a href="/TipoProduto/Create">Adicionar</a>
         </div>
+
+        <div class="menu-item" onclick="toggleSubMenu('submenu2')">Produto</div>
+        <div class="submenu" id="submenu2">
+            <a href="/Produto/List">Listar</a>
+            <a href="/Produto/Create">Adicionar</a>
+        </div>
+
+        <div class="menu-item" onclick="toggleSubMenu('submenu3')">Compra</div>
+        <div class="submenu" id="submenu3">
+            <a href="/Compra/List">Listar</a>
+            <a href="/Compra/Create">Adicionar</a>
+        </div>
     </div>
 
     <!-- Conteúdo Principal -->
@@ -88,8 +100,8 @@
     </div>
 
     <!-- Rodapé (Footer) -->
-    <div style="background-color: #333; color: #fff; padding: 10px; position: fixed; bottom: 0; width: 100%;">
-        &copy; 2024 Minha Aplicação. Todos os direitos reservados.
+    <div style="background-color: #333; color: #fff; padding: 10px; position: fixed; bottom: 0; width: 100%; text-align: center;">
+        &copy; 2024 Senai Gaspar Ricardo Júnior. Todos os direitos reservados.
     </div>
 
     <!-- Adicione os scripts JavaScript aqui -->

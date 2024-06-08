@@ -88,7 +88,14 @@ namespace MerceariaAPI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TypeUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
@@ -103,6 +110,8 @@ namespace MerceariaAPI.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("TypeUserId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -135,6 +144,9 @@ namespace MerceariaAPI.Migrations
 
                     b.Property<decimal>("PrecoVenda")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Transportadora")
                         .IsRequired()
@@ -213,6 +225,21 @@ namespace MerceariaAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TipoProdutos");
+                });
+
+            modelBuilder.Entity("MerceariaAPI.Models.TypeUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeUsers");
                 });
 
             modelBuilder.Entity("MerceariaAPI.Models.Venda", b =>
@@ -336,6 +363,17 @@ namespace MerceariaAPI.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("MerceariaAPI.Areas.Identity.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("MerceariaAPI.Models.TypeUser", "TypeUser")
+                        .WithMany()
+                        .HasForeignKey("TypeUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TypeUser");
                 });
 
             modelBuilder.Entity("MerceariaAPI.Models.Estoque", b =>

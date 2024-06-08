@@ -1,0 +1,26 @@
+@model MerceariaAPI.Models.Produto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar Produto</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div>
+        <label for="Nome">Nome:</label>
+        <input type="text" id="Nome" name="Nome" value="@Model.Nome" required />
+
+        <label for="TipoProdutoId">TipoProdutoId:</label>
+        <input type="text" id="TipoProdutoId" name="TipoProdutoId" value="@Model.TipoProdutoId" required />
+
+        <label for="Descricao">Descricao:</label>
+        <input type="text" id="Descricao" name="Descricao" value="@Model.Descricao" required />
+    </div>
+    <div>
+        <button type="submit">Salvar</button>
+    </div>
+</form>
+
+<a href="/TipoProdutoMvc/List">Voltar para a Lista</a>

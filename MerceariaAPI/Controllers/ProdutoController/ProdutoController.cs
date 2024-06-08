@@ -8,92 +8,145 @@ using MerceariaAPI.Models;
 
 namespace MerceariaAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProdutosController : ControllerBase
+    public class ProdutoController : Controller
     {
         private readonly AppDbContext _context;
 
-        public ProdutosController(AppDbContext context)
+        public ProdutoController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Produtos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
+        // GET: /Produto/List
+        public async Task<IActionResult> List()
         {
-            return await _context.Produtos.ToListAsync();
+            var produtos = await _context.Produtos.ToListAsync();
+            return View("/Views/Produto/List.cshtml", produtos);
         }
 
-        // GET: api/Produtos/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Produto>> GetProduto(int id)
+        //GET: /Produtos/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var produto = await _context.Produtos
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (produto == null)
             {
                 return NotFound();
             }
 
-            return produto;
+            return View(produto);
         }
 
-        // PUT: api/Produtos/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduto(int id, Produto produto)
+        // GET: /Produtos/Create
+        public IActionResult Create()
+        {
+            return View("/Views/Produto/Create.cshtml");
+        }
+
+        // POST: /Produtos/Create
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Nome, TipoProdutoId, Descricao")] Produto produto)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Add(produto);
+                    await _context.SaveChangesAsync(); 
+                    return RedirectToAction(nameof(List));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    ModelState.AddModelError("", "Erro ao salvar o produto. Por favor, tente novamente.");
+                    return View("/Views/Produto/Create.cshtml", produto);
+                }
+            }
+            return View("/Views/Produto/Create.cshtml", produto);
+        }
+
+        // GET: /Produtos/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var produto = await _context.Produtos.FindAsync(id);
+            if (produto == null)
+            {
+                return NotFound();
+            }
+            return View("/Views/Produto/Edit.cshtml", produto);
+        }
+
+        // POST: /Produtos/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Nome, TipoProdutoId, Descricao")] Produto produto)
         {
             if (id != produto.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(produto).State = EntityState.Modified;
-
-            try
+            if (ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProdutoExists(id))
+                try
                 {
-                    return NotFound();
+                    _context.Update(produto);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(List));
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!ProdutoExists(produto.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
-
-            return NoContent();
+            return View("/Views/Produto/Edit.cshtml", produto);
         }
 
-        // POST: api/Produtos
-        [HttpPost]
-        public async Task<ActionResult<Produto>> PostProduto(Produto produto)
-        {
-            _context.Produtos.Add(produto);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProduto), new { id = produto.Id }, produto);
-        }
-
-        // DELETE: api/Produtos/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduto(int id)
+        // GET: /Produtos/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var produto = await _context.Produtos
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (produto == null)
             {
                 return NotFound();
             }
 
-            _context.Produtos.Remove(produto);
-            await _context.SaveChangesAsync();
+            return View(produto);
+        }
 
-            return NoContent();
+        // POST: /Produtos/Delete/5
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var produto = await _context.Produtos.FindAsync(id);
+#pragma warning disable CS8604 // Possible null reference argument.
+            _context.Produtos.Remove(produto);
+#pragma warning restore CS8604 // Possible null reference argument.
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
 
         private bool ProdutoExists(int id)

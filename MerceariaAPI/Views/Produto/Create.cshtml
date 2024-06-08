@@ -1,0 +1,25 @@
+@model MerceariaAPI.Models.Produto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Criar Novo Produto</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label for="Nome">Nome:</label>
+        <input type="text" id="Nome" name="Nome" required />
+
+        <label for="TipoProdutoId">TipoProdutoId:</label>
+        <input type="text" id="TipoProdutoId" name="TipoProdutoId" required />
+
+        <label for="Descricao">Descricao:</label>
+        <input type="text" id="Descricao" name="Descricao" required />
+    </div>
+    <div>
+        <button type="submit">Salvar</button>
+    </div>
+</form>
+
+<a href="/Produto/List">Voltar para a Lista</a>

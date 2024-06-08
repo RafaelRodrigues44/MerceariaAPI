@@ -16,6 +16,8 @@ namespace MerceariaAPI.Models
         public decimal PrecoCompra { get; set; }
         public decimal PrecoVenda { get; set; }
 
+        public int Quantidade { get; set; }
+
         // Lista de produtos comprados nesta compra
         public List<Produto> Produtos { get; set; }
 
@@ -26,7 +28,7 @@ namespace MerceariaAPI.Models
             Produtos = new List<Produto>();
         }
 
-        public Compra(DateTime dataCompra, string lote, DateTime dataFabricacao, DateTime dataValidade, string fabricante, string vendedor, string transportadora, decimal precoCompra, decimal precoVenda)
+        public Compra(DateTime dataCompra, string lote, DateTime dataFabricacao, DateTime dataValidade, string fabricante, string vendedor, string transportadora, decimal precoCompra, decimal precoVenda, int quantidade)
         {
             DataCompra = dataCompra;
             Lote = lote;
@@ -37,7 +39,8 @@ namespace MerceariaAPI.Models
             Transportadora = transportadora;
             PrecoCompra = precoCompra;
             PrecoVenda = precoVenda;
-            Produtos = new List<Produto>(); // Inicializa a lista de produtos
+            Produtos = new List<Produto>(); 
+            Quantidade = quantidade;
         }
     }
 }

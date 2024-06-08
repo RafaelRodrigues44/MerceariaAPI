@@ -38,7 +38,9 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
+#pragma warning disable CS8604 // Possible null reference argument.
 var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
+#pragma warning restore CS8604 // Possible null reference argument.
 
 builder.Services.AddAuthentication(options =>
 {

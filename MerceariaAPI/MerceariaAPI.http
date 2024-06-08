@@ -1,6 +1,0 @@
-@MerceariaAPI_HostAddress = http://localhost:5247
-
-GET {{MerceariaAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

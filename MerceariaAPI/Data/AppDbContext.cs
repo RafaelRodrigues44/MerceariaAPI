@@ -16,6 +16,7 @@ namespace MerceariaAPI.Data
         public DbSet<Venda> Vendas { get; set; }
         public DbSet<Estoque> Estoque { get; set; }
         public DbSet<TipoProduto> TipoProdutos { get; set; }
+        public DbSet<TypeUser> TypeUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

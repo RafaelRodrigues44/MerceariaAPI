@@ -1,9 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
-using MerceariaAPI.Data;
-using MerceariaAPI.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MerceariaAPI.Data;
+using MerceariaAPI.Models;
 
 namespace MerceariaAPI.Controllers
 {
@@ -11,25 +12,25 @@ namespace MerceariaAPI.Controllers
     {
         private readonly AppDbContext _context;
 
-        public TipoProdutoController(AppDbContext context, ILogger<TipoProdutoController> logger)
+        public TipoProdutoController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: TipoProduto/List
+        // GET: /TipoProduto/List
         public async Task<IActionResult> List()
         {
             var tipoProdutos = await _context.TipoProdutos.ToListAsync();
             return View("/Views/TipoProduto/List.cshtml", tipoProdutos);
         }
 
-        // GET: TipoProduto/Create
+        // GET: /TipoProduto/Create
         public IActionResult Create()
         {
-            return View("/Views/TipoProduto/Create.cshtml");
+            return View();
         }
 
-        // POST: TipoProduto/Create
+        // POST: /TipoProduto/Create
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Id,Nome")] TipoProduto tipoProduto)
         {
@@ -39,10 +40,10 @@ namespace MerceariaAPI.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
             }
-            return View("/Views/TipoProduto/List.cshtml", tipoProduto);
+            return View("/Views/TipoProduto/Create.cshtml", tipoProduto);
         }
 
-        // EDIT: TipoProdutoMvc/Edit/5
+        // GET: /TipoProduto/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -58,7 +59,7 @@ namespace MerceariaAPI.Controllers
             return View("/Views/TipoProduto/Edit.cshtml", tipoProduto);
         }
 
-        // POST: TipoProduto/Edit/5
+        // POST: /TipoProduto/Edit/5
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] TipoProduto tipoProduto)
         {
@@ -87,28 +88,41 @@ namespace MerceariaAPI.Controllers
                 }
                 return RedirectToAction(nameof(List));
             }
-            return View("/Views/TipoProduto/Edit.cshtml", tipoProduto);
+            return View("/Views/TipoProduto/List.cshtml");
         }
 
-        private bool TipoProdutoExists(int id)
+        // GET: /TipoProduto/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            return _context.TipoProdutos.Any(e => e.Id == id);
-        }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        // DELETE: TipoProduto/Delete/(id)
-        [HttpDelete]
-        public async Task<IActionResult> DeleteTipoProduto(int id)
-        {
             var tipoProduto = await _context.TipoProdutos.FindAsync(id);
             if (tipoProduto == null)
             {
                 return NotFound();
             }
 
-            _context.TipoProdutos.Remove(tipoProduto);
-            await _context.SaveChangesAsync();
-            return View("/Views/TipoProduto/List.cshtml", tipoProduto);
+            return View("/Views/TipoProduto/Delete.cshtml", tipoProduto);
+        }
 
+        // POST: /TipoProduto/Delete/5
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var tipoProduto = await _context.TipoProdutos.FindAsync(id);
+#pragma warning disable CS8604 // Possible null reference argument.
+            _context.TipoProdutos.Remove(tipoProduto);
+#pragma warning restore CS8604 // Possible null reference argument.
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
+
+        private bool TipoProdutoExists(int id)
+        {
+            return _context.TipoProdutos.Any(e => e.Id == id);
         }
     }
 }

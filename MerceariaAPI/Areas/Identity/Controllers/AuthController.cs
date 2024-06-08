@@ -132,7 +132,9 @@ namespace MerceariaAPI.Areas.Identity.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
+#pragma warning disable CS8604 // Possible null reference argument.
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+#pragma warning restore CS8604 // Possible null reference argument.
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
