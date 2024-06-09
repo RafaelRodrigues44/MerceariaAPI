@@ -1,21 +1,19 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MerceariaAPI.Data;
-using MerceariaAPI.Areas.Identity.Models;
-using Microsoft.AspNetCore.Identity;
-using MerceariaAPI.Areas.Identity.Repositories.User;
-using MerceariaAPI.Areas.Identity.Repositories.Role;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MerceariaAPI.Areas.Identity.Models;
+using MerceariaAPI.Areas.Identity.Repositories.Role;
+using MerceariaAPI.Areas.Identity.Repositories.User;
+using MerceariaAPI.Data;
+using MerceariaAPI.Repositories;
+using MerceariaAPI.Models;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuração dos serviços
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,6 +22,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+
+// Registro do repositório genérico para todas as entidades
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
@@ -38,9 +39,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
-#pragma warning disable CS8604 // Possible null reference argument.
 var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
-#pragma warning restore CS8604 // Possible null reference argument.
 
 builder.Services.AddAuthentication(options =>
 {
@@ -68,9 +67,6 @@ builder.Services.AddLogging(logging =>
     logging.AddDebug();
 });
 
-// Adicionando suporte para Views
-builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -87,18 +83,13 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// Configuração para suporte a visualizações (templates)
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
 // Adicionando a configuração para carregar a view index.html ao acessar o root da aplicação
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapControllers();
-});
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

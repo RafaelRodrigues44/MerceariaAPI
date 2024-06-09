@@ -1,15 +1,15 @@
-@model MerceariaAPI.Models.TipoProduto
+@model MerceariaAPI.Areas.Identity.Models.TypeUser;
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Editar Tipo de Produto</h2>
+<h2>Editar Tipo de Cargo</h2>
 
 <form asp-action="Edit" method="post">
     <input type="hidden" name="Id" value="@Model.Id" />
     <div>
-        <label for="Nome">Nome:</label>
+        <label for="Nome">Cargo:</label>
         <input type="text" id="Nome" name="Nome" value="@Model.Nome" required />
     </div>
     <div>
@@ -17,4 +17,4 @@
     </div>
 </form>
 
-<a href="/TipoProduto/List">Voltar para a Lista</a>
+<a href="/TypeUser/List">Voltar</a>

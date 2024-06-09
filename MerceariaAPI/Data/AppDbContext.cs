@@ -12,9 +12,6 @@ namespace MerceariaAPI.Data
         }
 
         public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Compra> Compras { get; set; }
-        public DbSet<Venda> Vendas { get; set; }
-        public DbSet<Estoque> Estoque { get; set; }
         public DbSet<TipoProduto> TipoProdutos { get; set; }
         public DbSet<TypeUser> TypeUsers { get; set; }
 

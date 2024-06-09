@@ -88,10 +88,6 @@ namespace MerceariaAPI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
 
@@ -116,77 +112,25 @@ namespace MerceariaAPI.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("MerceariaAPI.Models.Compra", b =>
-                {
-                    b.Property<int>("CompraId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("DataCompra")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DataFabricacao")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DataValidade")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Fabricante")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Lote")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("PrecoCompra")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("PrecoVenda")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Transportadora")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Vendedor")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CompraId");
-
-                    b.ToTable("Compras");
-                });
-
-            modelBuilder.Entity("MerceariaAPI.Models.Estoque", b =>
+            modelBuilder.Entity("MerceariaAPI.Areas.Identity.Models.TypeUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("Estoque");
+                    b.ToTable("TypeUsers");
                 });
 
             modelBuilder.Entity("MerceariaAPI.Models.Produto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CompraId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Descricao")
@@ -200,14 +144,7 @@ namespace MerceariaAPI.Migrations
                     b.Property<int>("TipoProdutoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("VendaId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CompraId");
-
-                    b.HasIndex("VendaId");
 
                     b.ToTable("Produtos");
                 });
@@ -225,42 +162,6 @@ namespace MerceariaAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TipoProdutos");
-                });
-
-            modelBuilder.Entity("MerceariaAPI.Models.TypeUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeUsers");
-                });
-
-            modelBuilder.Entity("MerceariaAPI.Models.Venda", b =>
-                {
-                    b.Property<int>("VendaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("DataVenda")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NomeVendedor")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("VendaId");
-
-                    b.ToTable("Vendas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -367,35 +268,13 @@ namespace MerceariaAPI.Migrations
 
             modelBuilder.Entity("MerceariaAPI.Areas.Identity.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("MerceariaAPI.Models.TypeUser", "TypeUser")
+                    b.HasOne("MerceariaAPI.Areas.Identity.Models.TypeUser", "TypeUser")
                         .WithMany()
                         .HasForeignKey("TypeUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("TypeUser");
-                });
-
-            modelBuilder.Entity("MerceariaAPI.Models.Estoque", b =>
-                {
-                    b.HasOne("MerceariaAPI.Models.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Produto");
-                });
-
-            modelBuilder.Entity("MerceariaAPI.Models.Produto", b =>
-                {
-                    b.HasOne("MerceariaAPI.Models.Compra", null)
-                        .WithMany("Produtos")
-                        .HasForeignKey("CompraId");
-
-                    b.HasOne("MerceariaAPI.Models.Venda", null)
-                        .WithMany("ItensVenda")
-                        .HasForeignKey("VendaId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -447,16 +326,6 @@ namespace MerceariaAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MerceariaAPI.Models.Compra", b =>
-                {
-                    b.Navigation("Produtos");
-                });
-
-            modelBuilder.Entity("MerceariaAPI.Models.Venda", b =>
-                {
-                    b.Navigation("ItensVenda");
                 });
 #pragma warning restore 612, 618
         }

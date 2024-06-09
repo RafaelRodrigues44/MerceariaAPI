@@ -1,84 +1,90 @@
 using MerceariaAPI.Areas.Identity.Models;
 using MerceariaAPI.Areas.Identity.Repositories.User;
+using MerceariaAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ApplicationUserController : ControllerBase
+    public class ApplicationUserController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly IRepository<TypeUser> _typeUserRepository;
 
-        public ApplicationUserController(IUserRepository userRepository)
+        public ApplicationUserController(IUserRepository userRepository, IRepository<TypeUser> typeUserRepository)
         {
             _userRepository = userRepository;
+            _typeUserRepository = typeUserRepository;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<ApplicationUser>> GetUsers()
+        //GET: User/Create
+        [HttpGet("/User/Create")]
+        public IActionResult Create()
         {
-            return await _userRepository.GetUsers();
+            return View("/Views/User/Create.cshtml");
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ApplicationUser>> GetUserById(string id)
+        [HttpPost("/User/Create")]
+        public async Task<IActionResult> Create(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Crie um novo ApplicationUser com base nos dados do modelo
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+
+                // Busque o TypeUser com base no ID fornecido em model.TypeUserId
+                var userType =  _typeUserRepository.GetById(model.TypeUser);
+                if (userType != null)
+                {
+                    // Crie o usuário com o repositório
+                    await _userRepository.CreateUser(user, model.Password);
+
+                    // Redirecione para a lista de usuários após a criação bem-sucedida
+                    return RedirectToAction("List", "User");
+                }
+                else
+                {
+                    // Lida com o caso em que o tipo de usuário não foi encontrado
+                    // Você pode retornar uma mensagem de erro ou lidar com isso de outra forma, dependendo da sua lógica de negócios
+                    ModelState.AddModelError(string.Empty, "Tipo de usuário inválido.");
+                    return View("/Views/User/Create.cshtml", model);
+                }
+            }
+
+            // Se houver erros de validação, retorne a view de criação com o modelo inválido
+            return View("/Views/User/Create.cshtml", model);
+        }
+
+        // GET: /ApplicationUser/List
+        [HttpGet("/User/List")]
+        public async Task<IActionResult> List()
+        {
+            var users = await _userRepository.GetUsers();
+            return View("~/Views/User/List.cshtml", users);
+        }
+
+        // GET: /ApplicationUser/Edit/{id}
+        [HttpGet("/User/Edit/{id}")]
+        public async Task<IActionResult> Edit(string id)
         {
             var user = await _userRepository.GetUserById(id);
             if (user == null)
             {
                 return NotFound();
             }
-            return user;
+            return View("~/Views/User/Edit.cshtml", user);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ApplicationUser>> CreateUser([FromBody] RegisterModel model)
-        {
-            var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
-            var result = await _userRepository.CreateUser(user, model.Password);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-            return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
-        }
-
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(string id, [FromBody] ApplicationUser user)
-        {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-
-            await _userRepository.UpdateUser(user);
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
+        // GET: /ApplicationUser/Delete/{id}
+        [HttpGet("/User/Delete/{id}")]
+        public async Task<IActionResult> Delete(string id)
         {
             var user = await _userRepository.GetUserById(id);
             if (user == null)
             {
                 return NotFound();
             }
-
-            await _userRepository.DeleteUser(user);
-            return NoContent();
+            return View("~/Views/User/Delete.cshtml", user);
         }
     }
-
-         public class RegisterModel
-    {
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        
-    }
-
 }

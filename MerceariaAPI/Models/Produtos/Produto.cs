@@ -25,5 +25,10 @@ namespace MerceariaAPI.Models
             TipoProdutoId = tipoProdutoId;
             Descricao = descricao;
         }
+
+        public static implicit operator int(Produto v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

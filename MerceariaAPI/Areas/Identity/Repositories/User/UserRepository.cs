@@ -24,7 +24,7 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
             return await _userManager.FindByIdAsync(id);
         }
 
-        public async Task<IdentityResult> CreateUser(ApplicationUser user, string password) // Alterado aqui
+        public async Task<IdentityResult> CreateUser(ApplicationUser user, string password) 
         {
             var result = await _userManager.CreateAsync(user, password);
             return result;

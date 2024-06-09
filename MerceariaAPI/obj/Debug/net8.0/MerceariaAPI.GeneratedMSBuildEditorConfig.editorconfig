@@ -18,24 +18,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXENyZWF0ZS5jc2h0bWw=
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/GetById.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXEdldEJ5SWQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Compra/List.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhXExpc3QuY3NodG1s
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Auth/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Home/Index.cshtml]
@@ -76,4 +64,44 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1dG9cTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/GetById.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcR2V0QnlJZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/GetById.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxHZXRCeUlkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

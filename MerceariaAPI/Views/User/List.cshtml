@@ -1,0 +1,36 @@
+@model IEnumerable<MerceariaAPI.Areas.Identity.Models.ApplicationUser>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Usuários</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome de Usuário</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.TypeUser</td>
+                <td>
+                    <a href="/ApplicationUser/Edit/@user.Id">Editar</a> 
+                    <a href="/ApplicationUser/Delete/@user.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/User/Create">Adicionar</a>

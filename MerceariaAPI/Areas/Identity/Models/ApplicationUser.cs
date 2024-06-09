@@ -6,7 +6,6 @@ namespace MerceariaAPI.Areas.Identity.Models
     // Modelo para representar um usuário
     public class ApplicationUser : IdentityUser
     {
-        public string Tipo { get; set; }
 
         // Propriedade de navegação para o TypeUser
         public virtual TypeUser TypeUser { get; set; }
@@ -15,5 +14,13 @@ namespace MerceariaAPI.Areas.Identity.Models
     // Modelo para representar uma função de superusuário
     public class ApplicationRole : IdentityRole
     {
+    }
+
+     public class RegisterModel
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public int TypeUser { get; set; }
     }
 }

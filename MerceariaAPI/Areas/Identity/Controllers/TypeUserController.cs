@@ -1,74 +1,128 @@
-using Microsoft.AspNetCore.Mvc;
-using MerceariaAPI.Models;
-using MerceariaAPI.Areas.Identity.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MerceariaAPI.Data;
+using MerceariaAPI.Areas.Identity.Models;
 
-namespace MerceariaAPI.Controllers
+namespace MerceariaAPI.Areas.Identity.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class TypeUserController : ControllerBase
+    public class TypeUserController : Controller
     {
-        private readonly ITypeUserRepository _typeUserRepository;
+        private readonly AppDbContext _context;
 
-        public TypeUserController(ITypeUserRepository typeUserRepository)
+        public TypeUserController(AppDbContext context)
         {
-            _typeUserRepository = typeUserRepository;
+            _context = context;
         }
 
-        // GET: api/TypeUser
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        // GET: /TypeUser/List
+        public async Task<IActionResult> List()
         {
-            var typesUsers = await _typeUserRepository.GetTypesUsers();
-            return Ok(typesUsers);
+            var typeUsers = await _context.TypeUsers.ToListAsync();
+            return View("/Views/TypeUser/List.cshtml", typeUsers);
         }
 
-        // GET: api/TypeUser/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        // GET: /TypeUser/Create
+        public IActionResult Create()
         {
-            var typeUser = await _typeUserRepository.GetTypeUserById(id);
-            if (typeUser == null)
-            {
-                return NotFound();
-            }
-            return Ok(typeUser);
+            return View();
         }
 
-        // POST: api/TypeUser
+        // POST: /TypeUser/Create
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TypeUser typeUser)
+        public async Task<IActionResult> Create([Bind("Id,Nome")] TypeUser typeUser)
         {
-            var createdTypeUser = await _typeUserRepository.CreateTypeUser(typeUser);
-            return CreatedAtAction(nameof(Get), new { id = createdTypeUser.Id }, createdTypeUser);
+            if (ModelState.IsValid)
+            {
+                _context.Add(typeUser);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(List));
+            }
+            return View("/Views/TypeUser/Create.cshtml", typeUser);
         }
 
-        // PUT: api/TypeUser/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] TypeUser typeUser)
+        // GET: /TipoProduto/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            var existingTypeUser = await _typeUserRepository.GetTypeUserById(id);
-            if (existingTypeUser == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            typeUser.Id = id; // Ensure the correct ID is set
-            await _typeUserRepository.UpdateTypeUser(typeUser);
-            return NoContent();
-        }
 
-        // DELETE: api/TypeUser/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var typeUser = await _typeUserRepository.GetTypeUserById(id);
+            var typeUser = await _context.TypeUsers.FindAsync(id);
             if (typeUser == null)
             {
                 return NotFound();
             }
-            await _typeUserRepository.DeleteTypeUser(typeUser);
-            return NoContent();
+            return View("/Views/TypeUser/Edit.cshtml", typeUser);
+        }
+
+        // POST: /TipoProduto/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] TypeUser typeUser)
+        {
+            if (id != typeUser.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(typeUser);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TypeUserExists(typeUser.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(List));
+            }
+            return View("/Views/TypeUser/List.cshtml");
+        }
+
+        // GET: /TypeUser/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var typeUser = await _context.TypeUsers.FindAsync(id);
+            if (typeUser == null)
+            {
+                return NotFound();
+            }
+
+            return View("/Views/TypeUser/Delete.cshtml", typeUser);
+        }
+
+        // POST: /TypeUser/Delete/5
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var typeUser = await _context.TypeUsers.FindAsync(id);
+            #pragma warning disable CS8604 
+            _context.TypeUsers.Remove(typeUser);
+            #pragma warning restore CS8604 
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
+
+        private bool TypeUserExists(int id)
+        {
+            return _context.TypeUsers.Any(e => e.Id == id);
         }
     }
 }

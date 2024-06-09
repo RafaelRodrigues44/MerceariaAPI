@@ -113,9 +113,9 @@ namespace MerceariaAPI.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tipoProduto = await _context.TipoProdutos.FindAsync(id);
-#pragma warning disable CS8604 // Possible null reference argument.
+            #pragma warning disable CS8604 
             _context.TipoProdutos.Remove(tipoProduto);
-#pragma warning restore CS8604 // Possible null reference argument.
+            #pragma warning restore CS8604 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }

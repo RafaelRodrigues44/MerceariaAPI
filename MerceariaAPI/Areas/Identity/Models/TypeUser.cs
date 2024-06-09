@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MerceariaAPI.Models
+namespace MerceariaAPI.Areas.Identity.Models
 {
     public class TypeUser
     {

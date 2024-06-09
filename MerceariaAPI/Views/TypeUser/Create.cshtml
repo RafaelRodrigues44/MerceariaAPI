@@ -1,0 +1,19 @@
+@model MerceariaAPI.Areas.Identity.Models.TypeUser;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Criar Novo Tipo de Cargo</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label for="Nome">Cargo:</label>
+        <input type="text" id="Nome" name="Nome" required />
+    </div>
+    <div>
+        <button type="submit">Salvar</button>
+    </div>
+</form>
+
+<a href="/User/List">Voltar</a>

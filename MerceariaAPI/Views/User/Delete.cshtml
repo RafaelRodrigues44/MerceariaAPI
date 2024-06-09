@@ -1,0 +1,37 @@
+@model MerceariaAPI.Areas.Identity.Models.ApplicationUser
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Excluir Usuário</h2>
+
+<p>Tem certeza de que deseja excluir o usuário:</p>
+<div>
+    <h4>Usuário</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TypeUser)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions">
+            <input type="submit" value="Excluir" class="btn btn-default" />
+            @Html.ActionLink("Cancelar", "List")
+        </div>
+    }
+</div>

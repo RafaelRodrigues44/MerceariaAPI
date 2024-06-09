@@ -26,25 +26,18 @@ namespace MerceariaAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Compras",
+                name: "Produtos",
                 columns: table => new
                 {
-                    CompraId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    DataCompra = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Lote = table.Column<string>(type: "TEXT", nullable: false),
-                    DataFabricacao = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DataValidade = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Fabricante = table.Column<string>(type: "TEXT", nullable: false),
-                    Vendedor = table.Column<string>(type: "TEXT", nullable: false),
-                    Transportadora = table.Column<string>(type: "TEXT", nullable: false),
-                    PrecoCompra = table.Column<decimal>(type: "TEXT", nullable: false),
-                    PrecoVenda = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Quantidade = table.Column<int>(type: "INTEGER", nullable: false)
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    TipoProdutoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Descricao = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Compras", x => x.CompraId);
+                    table.PrimaryKey("PK_Produtos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,21 +67,6 @@ namespace MerceariaAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vendas",
-                columns: table => new
-                {
-                    VendaId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DataVenda = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    NomeVendedor = table.Column<string>(type: "TEXT", nullable: false),
-                    Total = table.Column<decimal>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vendas", x => x.VendaId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -114,7 +92,6 @@ namespace MerceariaAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Tipo = table.Column<string>(type: "TEXT", nullable: false),
                     TypeUserId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -140,33 +117,6 @@ namespace MerceariaAPI.Migrations
                         principalTable: "TypeUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Produtos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(type: "TEXT", nullable: false),
-                    TipoProdutoId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Descricao = table.Column<string>(type: "TEXT", nullable: false),
-                    CompraId = table.Column<int>(type: "INTEGER", nullable: true),
-                    VendaId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Produtos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Produtos_Compras_CompraId",
-                        column: x => x.CompraId,
-                        principalTable: "Compras",
-                        principalColumn: "CompraId");
-                    table.ForeignKey(
-                        name: "FK_Produtos_Vendas_VendaId",
-                        column: x => x.VendaId,
-                        principalTable: "Vendas",
-                        principalColumn: "VendaId");
                 });
 
             migrationBuilder.CreateTable(
@@ -254,26 +204,6 @@ namespace MerceariaAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Estoque",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ProdutoId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Quantidade = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Estoque", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Estoque_Produtos_ProdutoId",
-                        column: x => x.ProdutoId,
-                        principalTable: "Produtos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -315,21 +245,6 @@ namespace MerceariaAPI.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Estoque_ProdutoId",
-                table: "Estoque",
-                column: "ProdutoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Produtos_CompraId",
-                table: "Produtos",
-                column: "CompraId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Produtos_VendaId",
-                table: "Produtos",
-                column: "VendaId");
         }
 
         /// <inheritdoc />
@@ -351,7 +266,7 @@ namespace MerceariaAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Estoque");
+                name: "Produtos");
 
             migrationBuilder.DropTable(
                 name: "TipoProdutos");
@@ -363,16 +278,7 @@ namespace MerceariaAPI.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Produtos");
-
-            migrationBuilder.DropTable(
                 name: "TypeUsers");
-
-            migrationBuilder.DropTable(
-                name: "Compras");
-
-            migrationBuilder.DropTable(
-                name: "Vendas");
         }
     }
 }
