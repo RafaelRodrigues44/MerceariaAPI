@@ -32,7 +32,9 @@ namespace MerceariaAPI.Areas.Identity.Controllers
                 var user = new ApplicationUser
                 {
                     UserName = model.UserName,
-                    Email = model.Email
+                    Email = model.Email,
+                    Password = model.Password,
+                    TypeUserId = model.TypeUserId,
                 };
 
                 var userType = await _typeUserRepository.GetById(model.TypeUserId);
@@ -75,7 +77,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         [HttpGet("/User/Edit/{id}")]
         public async Task<IActionResult> Edit(int id)
         {
-            var user = await _userRepository.GetUserById(id);
+            var user = await _userRepository.GetUserById(id.ToString());
             if (user == null)
             {
                 return NotFound();
@@ -85,9 +87,9 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 
         // GET: /User/Delete/{id}
         [HttpGet("/User/Delete/{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            var user = await _userRepository.GetUserById(id);
+            var user = await _userRepository.GetUserById(id.ToString());
             if (user == null)
             {
                 return NotFound();

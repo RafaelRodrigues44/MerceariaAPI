@@ -22,7 +22,7 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
             return await Task.FromResult(_dbContext.Users);
         }
 
-        public async Task<ApplicationUser> GetUserById(int id)
+        public async Task<ApplicationUser> GetUserById(string id)
         {
             return await _dbContext.Users.FindAsync(id);
         }
@@ -32,6 +32,7 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
+                Password = password,
                 Email = model.Email,
                 TypeUserId = model.TypeUserId
             };
