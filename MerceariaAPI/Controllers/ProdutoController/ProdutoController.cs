@@ -8,6 +8,7 @@ using MerceariaAPI.Models;
 
 namespace MerceariaAPI.Controllers
 {
+    [Route("Produto")]
     public class ProdutoController : Controller
     {
         private readonly AppDbContext _context;
@@ -17,82 +18,53 @@ namespace MerceariaAPI.Controllers
             _context = context;
         }
 
-        // GET: /Produto/List
+        // GET: Produto/List
+        [HttpGet("List")]
         public async Task<IActionResult> List()
         {
             var produtos = await _context.Produtos.ToListAsync();
-            return View("/Views/Produto/List.cshtml", produtos);
+            return View("Views/Produto/List.cshtml", produtos);
         }
 
-        //GET: /Produtos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var produto = await _context.Produtos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (produto == null)
-            {
-                return NotFound();
-            }
-
-            return View(produto);
-        }
-
-        // GET: /Produtos/Create
+        // GET: /Produto/Create
+        [HttpGet("Create")]
         public IActionResult Create()
         {
-            return View("/Views/Produto/Create.cshtml");
+            return View("Views/Produto/Create.cshtml");
         }
 
-        // POST: /Produtos/Create
-        [HttpPost]
-        public async Task<IActionResult> Create([Bind("Nome, TipoProdutoId, Descricao")] Produto produto)
+        // POST: /Produto/Create
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create([Bind("Id,Nome,TipoProdutoId,Descricao")] Produto Produto)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Add(produto);
-                    await _context.SaveChangesAsync(); 
-                    return RedirectToAction(nameof(List));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    ModelState.AddModelError("", "Erro ao salvar o produto. Por favor, tente novamente.");
-                    return View("/Views/Produto/Create.cshtml", produto);
-                }
+                _context.Add(Produto);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(List));
             }
-            return View("/Views/Produto/Create.cshtml", produto);
+            return View("Views/Produto/Create.cshtml", Produto);
         }
 
-        // GET: /Produtos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Produto/Edit/5
+        [HttpGet("Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var produto = await _context.Produtos.FindAsync(id);
             if (produto == null)
             {
                 return NotFound();
             }
-            return View("/Views/Produto/Edit.cshtml", produto);
+            return View("Views/Produto/Edit.cshtml", produto);
         }
 
-        // POST: /Produtos/Edit/5
-        [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Nome, TipoProdutoId, Descricao")] Produto produto)
+        // POST: Produto/Edit/5
+        [HttpPost("Edit/{id}")]
+        public async Task<IActionResult> Edit(int id, Produto produto)
         {
             if (id != produto.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             if (ModelState.IsValid)
@@ -101,7 +73,6 @@ namespace MerceariaAPI.Controllers
                 {
                     _context.Update(produto);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(List));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -114,37 +85,31 @@ namespace MerceariaAPI.Controllers
                         throw;
                     }
                 }
+                return RedirectToAction(nameof(List));
             }
-            return View("/Views/Produto/Edit.cshtml", produto);
+            return View("Views/Produto/List.cshtml");
         }
 
-
-        // GET: /Produtos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Produto/Delete/5
+        [HttpGet("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var produto = await _context.Produtos
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var produto = await _context.Produtos.FindAsync(id);
             if (produto == null)
             {
                 return NotFound();
             }
 
-            return View(produto);
+            return View("Views/Produto/Delete.cshtml", produto);
         }
 
-        // POST: /Produtos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Produto/Delete/5
+        [HttpPost("Delete/{id}"), ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var produto = await _context.Produtos.FindAsync(id);
-#pragma warning disable CS8604 // Possible null reference argument.
             _context.Produtos.Remove(produto);
-#pragma warning restore CS8604 // Possible null reference argument.
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }
@@ -155,3 +120,4 @@ namespace MerceariaAPI.Controllers
         }
     }
 }
+

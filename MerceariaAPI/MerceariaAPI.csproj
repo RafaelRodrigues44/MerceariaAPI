@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <NoWarn>8618;8603;8981</NoWarn>
+    <NoWarn>CS863,CS8632, CS8981</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

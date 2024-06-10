@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using MerceariaAPI.Areas.Identity.Models;
 using MerceariaAPI.Areas.Identity.Repositories.Role;
 using MerceariaAPI.Areas.Identity.Repositories.User;
+using MerceariaAPI.Areas.Identity.Repositories.Type;
 using MerceariaAPI.Data;
 using MerceariaAPI.Repositories;
 using MerceariaAPI.Models;
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<ITypeUserRepository, TypeUserRepository>();
 
 // Registro do repositório genérico para todas as entidades
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

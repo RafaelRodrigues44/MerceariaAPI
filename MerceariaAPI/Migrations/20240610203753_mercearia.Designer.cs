@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MerceariaAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240609210005_mercearia")]
+    [Migration("20240610203753_mercearia")]
     partial class mercearia
     {
         /// <inheritdoc />
@@ -79,6 +79,9 @@ namespace MerceariaAPI.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
@@ -137,11 +140,9 @@ namespace MerceariaAPI.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("TipoProdutoId")
@@ -159,7 +160,6 @@ namespace MerceariaAPI.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

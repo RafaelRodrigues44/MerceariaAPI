@@ -8,7 +8,7 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
     public interface IUserRepository
     {
         Task<IEnumerable<ApplicationUser>> GetUsers();
-        Task<ApplicationUser> GetUserById(string id);
+        Task<ApplicationUser> GetUserById(int id);
         Task<IdentityResult> CreateUser(ApplicationUser user, string password);
         Task UpdateUser(ApplicationUser user);
         Task DeleteUser(ApplicationUser user);

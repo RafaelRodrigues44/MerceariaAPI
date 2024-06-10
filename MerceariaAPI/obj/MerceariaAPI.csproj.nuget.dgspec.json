@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj": {}
+    "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj": {
+    "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
         "projectName": "MerceariaAPI",
-        "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
-        "packagesPath": "C:\\Users\\rafae\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\obj\\",
+        "projectPath": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\MerceariaAPI.csproj",
+        "packagesPath": "C:\\Users\\Rafael Rodrigues\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rafael Rodrigues\\Desktop\\MerceariaAPI\\MerceariaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rafae\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Rafael Rodrigues\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -105,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
