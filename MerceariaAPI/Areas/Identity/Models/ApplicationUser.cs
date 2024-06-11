@@ -6,7 +6,6 @@ namespace MerceariaAPI.Areas.Identity.Models
     // Modelo para representar um usuário
     public class ApplicationUser : IdentityUser
     {
-        public string Password { get; set; }
         public virtual TypeUser TypeUser { get; set; }
 
          // Adicione a propriedade TypeUserId

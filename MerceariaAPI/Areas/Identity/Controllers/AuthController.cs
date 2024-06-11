@@ -35,6 +35,8 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             _roleRepository = roleRepository;
         }
 
+        [HttpGet]
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {

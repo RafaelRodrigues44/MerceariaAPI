@@ -9,7 +9,7 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
     {
         Task<IEnumerable<ApplicationUser>> GetUsers();
         Task<ApplicationUser> GetUserById(string id);
-        Task<IdentityResult> CreateUser(ApplicationUser user, string password);
+        Task<IdentityResult> CreateUser(ApplicationUser user);
         Task UpdateUser(ApplicationUser user);
         Task DeleteUser(ApplicationUser user);
         Task<bool> CheckPasswordAsync(ApplicationUser user, string password);

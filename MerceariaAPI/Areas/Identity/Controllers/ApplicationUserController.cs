@@ -33,14 +33,13 @@ namespace MerceariaAPI.Areas.Identity.Controllers
                 {
                     UserName = model.UserName,
                     Email = model.Email,
-                    Password = model.Password,
                     TypeUserId = model.TypeUserId,
                 };
 
                 var userType = await _typeUserRepository.GetById(model.TypeUserId);
                 if (userType != null)
                 {
-                    var result = await _userRepository.CreateUser(user, model.Password);
+                    var result = await _userRepository.CreateUser(user);
 
                     if (result.Succeeded)
                     {

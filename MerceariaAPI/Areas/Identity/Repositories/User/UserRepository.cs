@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -32,17 +33,16 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
             return null;
         }
 
-        public async Task<IdentityResult> CreateUser(ApplicationUser model, string password) 
+        public async Task<IdentityResult> CreateUser(ApplicationUser model) 
         {
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
-                Password = password,
                 Email = model.Email,
                 TypeUserId = model.TypeUserId
             };
 
-            var result = await _userManager.CreateAsync(user, password);
+            var result = await _userManager.CreateAsync(user);
             return result;
         }
 
@@ -61,12 +61,12 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
 
         public async Task<ApplicationUser> GetUserByUsername(string username)
         {
-            return await _dbContext.Users.FindAsync(username);
+            return await _userManager.FindByNameAsync(username);
         }
 
         public async Task<ApplicationUser> GetUserByEmail(string email)
         {
-            return await _dbContext.Users.FindAsync(email);
+            return await _userManager.FindByEmailAsync(email);
         }
 
         public async Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
@@ -76,7 +76,7 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
 
         public async Task<(string username, string passwordHash)> GetLoginCredentials(string username)
         {
-            var user = await _dbContext.Users.FindAsync(username);
+            var user = await _userManager.FindByNameAsync(username);
             if (user == null)
             {
                 return (null, null);
