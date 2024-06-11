@@ -7,16 +7,15 @@
 <h2>Editar Usuário</h2>
 
 <form asp-action="Edit" method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
     <div>
-        <label for="Username">Nome de Usuário:</label>
-        <input type="text" id="Username" name="Username" value="@Model.UserName" required />
+        <label for="UserName">Nome de Usuário:</label>
+        <input type="text" id="UserName" name="UserName" value="@Model.UserName" required />
 
         <label for="Email">Email:</label>
         <input type="email" id="Email" name="Email" value="@Model.Email" required />
 
         <label for="TypeUserId">Cargo:</label>
-        <input type="typeuserid" id="TypeUserId" name="TypeUserid" value="@Model.TypeUser" required />
+        <input type="number" id="TypeUserId" name="TypeUserId" value="@Model.TypeUserId" required />
     </div>
     <div>
         <button type="submit">Salvar</button>

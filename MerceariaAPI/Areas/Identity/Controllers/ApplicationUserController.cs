@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
+    [Route("User")]
     public class ApplicationUserController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -17,14 +18,13 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             _typeUserRepository = typeUserRepository;
         }
 
-        //GET: User/Create
-        [HttpGet("/User/Create")]
+        [HttpGet("Create")]
         public IActionResult CreateUser()
         {
             return View("/Views/User/Create.cshtml");
         }
 
-        [HttpPost("/User/Create")]
+        [HttpPost("Create")]
         public async Task<IActionResult> CreateUser(ApplicationUser model)
         {
             if (ModelState.IsValid)
@@ -44,7 +44,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("List", "User");
+                        return RedirectToAction("List");
                     }
                     else
                     {
@@ -65,19 +65,17 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return View("/Views/User/Create.cshtml", model);
         }
 
-        // GET: /User/List
-        [HttpGet("/User/List")]
+        [HttpGet("List")]
         public async Task<IActionResult> List()
         {
             var users = await _userRepository.GetUsers();
             return View("~/Views/User/List.cshtml", users);
         }
 
-        // GET: /User/Edit/{id}
-        [HttpGet("/User/Edit/{id}")]
-        public async Task<IActionResult> Edit(int id)
+        [HttpGet("Edit/{id}")]
+        public async Task<IActionResult> Edit(string id)
         {
-            var user = await _userRepository.GetUserById(id.ToString());
+            var user = await _userRepository.GetUserById(id);
             if (user == null)
             {
                 return NotFound();
@@ -85,16 +83,51 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return View("~/Views/User/Edit.cshtml", user);
         }
 
-        // GET: /User/Delete/{id}
-        [HttpGet("/User/Delete/{id}")]
+        [HttpPost("Edit/{id}")]
+        public async Task<IActionResult> Edit(string id, ApplicationUser model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userRepository.GetUserById(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                user.TypeUserId = model.TypeUserId;
+
+                await _userRepository.UpdateUser(user);
+                return RedirectToAction("List");
+            }
+
+            return View("~/Views/User/Edit.cshtml", model);
+        }
+
+        [HttpGet("Delete/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var user = await _userRepository.GetUserById(id.ToString());
+            var user = await _userRepository.GetUserById(id);
             if (user == null)
             {
                 return NotFound();
             }
             return View("~/Views/User/Delete.cshtml", user);
+        }
+
+        [HttpPost("Delete/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var user = await _userRepository.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await _userRepository.DeleteUser(user);
+            return RedirectToAction("List");
         }
     }
 }

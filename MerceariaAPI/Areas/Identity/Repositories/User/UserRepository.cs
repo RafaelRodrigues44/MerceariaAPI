@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using MerceariaAPI.Areas.Identity.Models;
 using MerceariaAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MerceariaAPI.Areas.Identity.Repositories.User
 {
@@ -24,7 +25,11 @@ namespace MerceariaAPI.Areas.Identity.Repositories.User
 
         public async Task<ApplicationUser> GetUserById(string id)
         {
-            return await _dbContext.Users.FindAsync(id);
+            if (Guid.TryParse(id, out Guid userId))
+            {
+                return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId.ToString());
+            }
+            return null;
         }
 
         public async Task<IdentityResult> CreateUser(ApplicationUser model, string password) 
