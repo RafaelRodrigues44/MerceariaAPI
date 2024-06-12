@@ -11,12 +11,13 @@ using MerceariaAPI.Areas.Identity.Models;
 using Microsoft.Extensions.Logging;
 using MerceariaAPI.Areas.Identity.Repositories.User;
 using MerceariaAPI.Areas.Identity.Repositories.Role;
+using System.Collections.Generic;
 
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -35,11 +36,20 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             _roleRepository = roleRepository;
         }
 
-        [HttpGet]
+        [HttpGet("Login")]
+        public IActionResult Login()
+        {
+            return View("/Views/Auth/Login.cshtml");
+        }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginModel model) 
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var (username, passwordHash) = await _userRepository.GetLoginCredentials(model.Username);
 
             if (username == null || passwordHash == null)
@@ -57,7 +67,22 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 
                 var roles = await _userManager.GetRolesAsync(user);
                 var token = GenerateJwtToken(username, roles);
-                return Ok(new { token });
+
+                var response = new
+                {
+                    Token = token,
+                };
+
+                if (Request.Headers["Accept"].ToString().Contains("application/json"))
+                {
+                    return Ok(response);
+                }
+                else
+                {
+                    ViewData["Token"] = token;
+                    ViewData["User"] = user;
+                    return View("Views/Home/Index.cshtml", response); 
+                }
             }
 
             _logger.LogInformation("Password mismatch for user {Username}", username);
@@ -65,15 +90,8 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return Unauthorized("Login or Password invalid!");
         }
 
-        [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return Ok();
-        }
-
         [HttpPost("assign-role")]
-        public async Task<IActionResult> AssignRole([FromBody] AssignRoleModel model)
+        public async Task<IActionResult> AssignRole([FromBody] AssignRoleModel model) // Ensure FromBody attribute is used
         {
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
@@ -97,7 +115,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpPost("remove-role")]
-        public async Task<IActionResult> RemoveRole([FromBody] AssignRoleModel model)
+        public async Task<IActionResult> RemoveRole([FromBody] AssignRoleModel model) // Ensure FromBody attribute is used
         {
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
@@ -134,9 +152,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-#pragma warning disable CS8604 // Possible null reference argument.
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-#pragma warning restore CS8604 // Possible null reference argument.
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
@@ -161,7 +177,3 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
     }
 }
-
-
-
-

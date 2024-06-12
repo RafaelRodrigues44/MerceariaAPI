@@ -1,9 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 
-public class HomeController : Controller
+namespace MerceariaAPI.Controllers
 {
-    public IActionResult Index()
+    public class HomeController : Controller
     {
-        return View();
+        public IActionResult Index()
+        {
+            // Recupera as informações do TempData
+            var username = TempData["Username"]?.ToString();
+            var token = TempData["Token"]?.ToString();
+
+            // Passa as informações para a view através do ViewBag
+            ViewBag.Username = username;
+            ViewBag.Token = token;
+
+            return View();
+        }
     }
 }

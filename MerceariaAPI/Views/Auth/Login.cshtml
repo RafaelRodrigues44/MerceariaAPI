@@ -1,0 +1,57 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+<form id="loginForm" method="post" class="form">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<!-- Script para enviar o formulário como JSON -->
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        var loginData = {
+            Username: username,
+            Password: password
+        };
+
+        fetch('/api/Auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.token) {
+                // Autenticação bem-sucedida
+                alert("Bem-vindo, " + username + "!");
+                // Redirecionar para a página inicial ou fazer algo com o token
+                window.location.href = "/";
+            } else {
+                // Exibir mensagem de erro
+                alert("Login ou senha inválidos!");
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao tentar fazer login.");
+        });
+    });
+</script>
