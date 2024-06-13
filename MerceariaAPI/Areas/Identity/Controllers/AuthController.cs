@@ -109,24 +109,24 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        [HttpPost("logout")]
+        [HttpGet("logout")]
         [Authorize]
         public async Task<IActionResult> Logout()
         {
             try
             {
-                // Realiza o logout do usuário
-                await _signInManager.SignOutAsync();
-
+                var username = User.Identity.Name; // Obtém o nome do usuário atualmente autenticado
+                
+                await _signInManager.SignOutAsync(); // Realiza o logout do usuário
+                
                 // Limpa a sessão
                 HttpContext.Session.Clear();
+                
+                // Invalida o token JWT no cliente (opcional)
 
-                // Invalida o token JWT no cliente (opcional, dependendo de como você está gerenciando o token)
-                // Por exemplo, você pode limpar cookies ou localStorage do lado do cliente
+                _logger.LogInformation("User '{Username}' logged out successfully.", username);
 
-                _logger.LogInformation("User logged out successfully.");
-
-                // Redireciona para a página inicial ou outra página após o logout
+                // Redireciona para a página inicial após o logout
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
