@@ -2,19 +2,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Login</h2>
-
 <form id="loginForm" method="post" class="form">
-    <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 
 <!-- Script para enviar o formulário como JSON -->
 <script>
@@ -40,10 +38,18 @@
         .then(response => response.json())
         .then(data => {
             if (data.token) {
-                // Autenticação bem-sucedida
-                alert("Bem-vindo, " + username + "!");
-                // Redirecionar para a página inicial ou fazer algo com o token
-                window.location.href = "/";
+                // Armazenar os dados na sessão
+                fetch('/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(() => {
+                    // Redirecionar para a página inicial
+                    window.location.href = "/";
+                });
             } else {
                 // Exibir mensagem de erro
                 alert("Login ou senha inválidos!");

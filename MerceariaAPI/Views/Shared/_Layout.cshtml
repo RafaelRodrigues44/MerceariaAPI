@@ -70,6 +70,10 @@
         <h1>MerceariaAPI</h1>
         <!-- Botão Home -->
         <a href="/" style="color: #fff; text-decoration: none;">Home</a>
+
+        @if (Context.Session.GetString("Username") != null){
+           <p>Bem-vindo, @Context.Session.GetString("Username")!</p>
+        }
     </div>
 
     <!-- Barra lateral (Sidebar) -->
@@ -98,8 +102,25 @@
         <div class="submenu" id="submenu5">
             <a href="/User/List">Listar</a>
             <a href="/User/Create">Adicionar</a>
+        
         </div>
-    </div>
+            @if (Context.Session.GetString("Username") == null)
+            {
+                <!-- Usuário não está logado -->
+                <div class="menu-item" onclick="toggleSubMenu('submenu6')">Minha Conta</div>
+                <div class="submenu" id="submenu6">
+                    <a href='api/Auth/login'>Login</a> <!-- Link para a página de login -->
+                </div>
+            }
+            else
+            {
+                <!-- Usuário está logado -->
+                <div class="menu-item" onclick="toggleSubMenu('submenu6')">Minha Conta</div>
+                <div class="submenu" id="submenu6">
+                    <a href='/api/Auth/logout'>Logout</a> <!-- Link para o endpoint de logout -->
+                </div>
+            }
+        </div>
 
     <!-- Conteúdo Principal -->
     <div style="margin-left: 250px; padding: 20px;">

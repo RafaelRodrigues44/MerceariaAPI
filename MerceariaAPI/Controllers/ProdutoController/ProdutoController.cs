@@ -5,25 +5,38 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MerceariaAPI.Data;
 using MerceariaAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerceariaAPI.Controllers
 {
     [Route("Produto")]
+    [Authorize]
     public class ProdutoController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ILogger<ProdutoController> _logger;
 
-        public ProdutoController(AppDbContext context)
+        public ProdutoController(ILogger<ProdutoController> logger, AppDbContext context)
         {
             _context = context;
+            _logger = logger;
         }
 
-        // GET: Produto/List
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {
-            var produtos = await _context.Produtos.ToListAsync();
-            return View("Views/Produto/List.cshtml", produtos);
+            _logger.LogInformation("User {Username} accessed List action.", User.Identity.Name);
+
+            try
+            {
+                var produtos = await _context.Produtos.ToListAsync();
+                return View("Views/Produto/List.cshtml", produtos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while retrieving produtos.");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         // GET: /Produto/Create

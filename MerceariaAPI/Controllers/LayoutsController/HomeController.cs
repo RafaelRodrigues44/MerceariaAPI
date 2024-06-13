@@ -7,13 +7,14 @@ namespace MerceariaAPI.Controllers
         public IActionResult Index()
         {
             // Recupera as informações do TempData
-            var username = TempData["Username"]?.ToString();
-            var token = TempData["Token"]?.ToString();
+            var token = HttpContext.Session.GetString("Token");
+            var username = HttpContext.Session.GetString("Username");
 
-            // Passa as informações para a view através do ViewBag
-            ViewBag.Username = username;
-            ViewBag.Token = token;
-
+            if (!string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(username))
+            {
+                ViewData["User"] = username;
+                ViewData["Token"] = token;
+            }
             return View();
         }
     }

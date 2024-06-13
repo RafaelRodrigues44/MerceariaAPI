@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using MerceariaAPI.Areas.Identity.Repositories.User;
 using MerceariaAPI.Areas.Identity.Repositories.Role;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
@@ -43,7 +45,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model) 
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -63,79 +65,24 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 
             if (passwordMatched)
             {
-                _logger.LogInformation("Password matched for user {Username}", username);
-
                 var roles = await _userManager.GetRolesAsync(user);
                 var token = GenerateJwtToken(username, roles);
+
+                HttpContext.Session.SetString("Token", token);
+                HttpContext.Session.SetString("Username", username);
 
                 var response = new
                 {
                     Token = token,
+                    Username = username
                 };
-
-                if (Request.Headers["Accept"].ToString().Contains("application/json"))
-                {
-                    return Ok(response);
-                }
-                else
-                {
-                    ViewData["Token"] = token;
-                    ViewData["User"] = user;
-                    return View("Views/Home/Index.cshtml", response); 
-                }
+                _logger.LogInformation("Response {response}", response);
+                return Ok(response);
             }
-
-            _logger.LogInformation("Password mismatch for user {Username}", username);
-
-            return Unauthorized("Login or Password invalid!");
-        }
-
-        [HttpPost("assign-role")]
-        public async Task<IActionResult> AssignRole([FromBody] AssignRoleModel model) // Ensure FromBody attribute is used
-        {
-            var user = await _userManager.FindByNameAsync(model.Username);
-            if (user == null)
+            else
             {
-                return NotFound("User not found.");
+                return Unauthorized("Invalid password.");
             }
-
-            var role = await _roleRepository.GetRoleByName(model.RoleName);
-            if (role == null)
-            {
-                return NotFound("Role not found.");
-            }
-
-            var result = await _userManager.AddToRoleAsync(user, model.RoleName);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return Ok();
-        }
-
-        [HttpPost("remove-role")]
-        public async Task<IActionResult> RemoveRole([FromBody] AssignRoleModel model) // Ensure FromBody attribute is used
-        {
-            var user = await _userManager.FindByNameAsync(model.Username);
-            if (user == null)
-            {
-                return NotFound("User not found.");
-            }
-
-            var role = await _roleRepository.GetRoleByName(model.RoleName);
-            if (role == null)
-            {
-                return NotFound("Role not found.");
-            }
-
-            var result = await _userManager.RemoveFromRoleAsync(user, model.RoleName);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return Ok();
         }
 
         private string GenerateJwtToken(string username, IList<string> roles)
@@ -144,13 +91,10 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             {
                 new Claim(JwtRegisteredClaimNames.Sub, username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, username)
+                new Claim(ClaimTypes.Name, username)
             };
 
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -165,15 +109,44 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public class LoginModel
+        [HttpPost("logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout()
         {
-            public string Username { get; set; }
-            public string Password { get; set; }
-        }
-        public class AssignRoleModel
-        {
-            public string Username { get; set; }
-            public string RoleName { get; set; }
+            try
+            {
+                // Realiza o logout do usuário
+                await _signInManager.SignOutAsync();
+
+                // Limpa a sessão
+                HttpContext.Session.Clear();
+
+                // Invalida o token JWT no cliente (opcional, dependendo de como você está gerenciando o token)
+                // Por exemplo, você pode limpar cookies ou localStorage do lado do cliente
+
+                _logger.LogInformation("User logged out successfully.");
+
+                // Redireciona para a página inicial ou outra página após o logout
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during logout.");
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
+
+    public class LoginModel
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class TokenModel
+    {
+        public string Token { get; set; }
+        public string Username { get; set; }
+    }
 }
+

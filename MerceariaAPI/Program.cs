@@ -1,5 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using MerceariaAPI.Areas.Identity.Models;
 using MerceariaAPI.Areas.Identity.Repositories.Role;
@@ -7,9 +12,8 @@ using MerceariaAPI.Areas.Identity.Repositories.User;
 using MerceariaAPI.Areas.Identity.Repositories.Type;
 using MerceariaAPI.Data;
 using MerceariaAPI.Repositories;
-using MerceariaAPI.Models;
+using System;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,10 +42,10 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
     options.Password.RequiredUniqueChars = 1;
     options.SignIn.RequireConfirmedAccount = true;
 })
-.AddEntityFrameworkStores<AppDbContext>()
-.AddDefaultTokenProviders();
+.AddEntityFrameworkStores<AppDbContext>();
 
-var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
+// Configuração do JWT
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -58,7 +62,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(key)
+        IssuerSigningKey = key
     };
 });
 
@@ -67,6 +71,15 @@ builder.Services.AddLogging(logging =>
     logging.ClearProviders();
     logging.AddConsole();
     logging.AddDebug();
+});
+
+// Configuração da sessão
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
 var app = builder.Build();
@@ -86,6 +99,21 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+
+// Middleware para passar o token JWT para todas as requisições
+app.Use(async (context, next) =>
+{
+    var token = context.Session.GetString("Token");
+    
+    if (!string.IsNullOrEmpty(token))
+    {
+        context.Request.Headers.Append("Authorization", "Bearer " + token);
+    }
+
+    await next();
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
