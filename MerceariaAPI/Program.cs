@@ -73,14 +73,14 @@ builder.Services.AddAuthentication(options =>
             if (!context.Response.HasStarted)
             {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                context.Response.Redirect("/Auth/AccessDenied");
+                context.Response.Redirect("/api/Auth/AccessDenied");
             }
             return Task.CompletedTask;
         },
         OnForbidden = context =>
         {
             context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            context.Response.Redirect("/Auth/AccessDenied");
+            context.Response.Redirect("/api/Auth/AccessDenied");
             return Task.CompletedTask;
         }
     };
@@ -144,11 +144,11 @@ app.Use(async (context, next) =>
 
     if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
     {
-        context.Response.Redirect("/Auth/AccessDenied");
+        context.Response.Redirect("/api/Auth/AccessDenied");
     }
     else if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
     {
-        context.Response.Redirect("/Auth/AccessDenied");
+        context.Response.Redirect("/api/Auth/AccessDenied");
     }
 });
 
@@ -156,11 +156,5 @@ app.Use(async (context, next) =>
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-// Adicione uma rota específica para AccessDenied, se necessário
-app.MapControllerRoute(
-    name: "accessDenied",
-    pattern: "Auth/AccessDenied",
-    defaults: new { controller = "Auth", action = "AccessDenied" });
 
 app.Run();

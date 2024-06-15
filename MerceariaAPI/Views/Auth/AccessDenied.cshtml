@@ -2,6 +2,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Acesso Negado</h1>
-<p>Você não tem permissão para acessar esta página.</p>
-<a asp-controller="Account" asp-action="Login">Login</a>
+@section Styles {
+    <style>
+        /* Estilo para o corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://wallpapers.com/images/hd/london-eye-ferris-wheel-in-united-kingdom-9ua5624z8tyck98d.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 0; /
+            padding: 0; 
+        }
+
+        /* Estilo para o card de acesso negado */
+        .access-denied-card {
+            width: 400px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(50, 49, 49, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            margin-top: 150px;
+            margin-left: 850px;
+        }
+    </style>
+}
+
+<div class="access-denied-card">
+    <h1>Acesso Negado</h1>
+    <p>Você não tem permissão para acessar esta página.</p> 
+    <p>Por Favor faça login!</p>
+</div>

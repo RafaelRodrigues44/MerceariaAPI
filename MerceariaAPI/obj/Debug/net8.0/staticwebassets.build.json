@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ovEpCwTGJXq6Nd+WBbeNM2SoRUoNeZsDNPvEIf19BR0=",
+  "Hash": "X79Bz2wD6IK1+hmWZD3KS9mTQlmfKjUrUzdDx0+ajmg=",
   "Source": "MerceariaAPI",
   "BasePath": "_content/MerceariaAPI",
   "Mode": "Default",
@@ -15,5 +15,25 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\wwwroot\\ok.jpg",
+      "SourceId": "MerceariaAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\wwwroot\\",
+      "BasePath": "_content/MerceariaAPI",
+      "RelativePath": "ok.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ok.jpg"
+    }
+  ]
 }

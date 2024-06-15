@@ -115,9 +115,10 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         {
             try
             {
-                var username = User.Identity.Name; // Obtém o nome do usuário atualmente autenticado
+                var username = User.Identity.Name; 
                 
-                await _signInManager.SignOutAsync(); // Realiza o logout do usuário
+                await _signInManager.SignOutAsync(); 
+                
                 
                 // Limpa a sessão
                 HttpContext.Session.Clear();
@@ -139,7 +140,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         [HttpGet("AccessDenied")]
         public IActionResult AccessDenied()
         {
-            return View("AccessDenied");
+            return View("~/Views/Auth/AccessDenied.cshtml");
         }
 
     }
