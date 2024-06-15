@@ -2,62 +2,126 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form id="loginForm" method="post" class="form">
+@section Styles {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://citybreakinfo.com/pix/2018-07/1532261860269744-1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+
+        .form-container {
+            width: 250px;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.5); 
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(50, 49, 49, 0.1);
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            margin-top: 230px;
+            align-self: center;
+            margin-left: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            width: 40%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #376c49;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 70px;
+        }
+
+        .btn-primary:hover {
+            background-color: #94be86;
+        }
+
+        .form-control {
+            width: 60%; 
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: white; 
+            color: #333; 
+            -webkit-appearance: none; 
+            -moz-appearance: none; 
+            appearance: none; /
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            color: #ede9e9;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            var loginData = {
+                Username: username,
+                Password: password
+            };
+
+            fetch('/api/Auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(loginData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    // Armazenar os dados na sessão (exemplo)
+                    localStorage.setItem('token', data.token);
+                    // Redirecionar para a página inicial ou fazer outra ação necessária
+                    window.location.href = "/";
+                } else {
+                    // Exibir mensagem de erro
+                    alert("Login ou senha inválidos!");
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert("Ocorreu um erro ao tentar fazer login.");
+            });
+        });
+    </script>
+}
+
+<div class="form-container">
+    <form id="loginForm" method="post" class="form">
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" class="form-control" />
+            <input type="text" id="username" name="username" class="form-control" required />
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" class="form-control" />
+            <input type="password" id="password" name="password" class="form-control" required />
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
-
-<!-- Script para enviar o formulário como JSON -->
-<script>
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
-
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-
-        var loginData = {
-            Username: username,
-            Password: password
-        };
-
-        fetch('/api/Auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(loginData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.token) {
-                // Armazenar os dados na sessão
-                fetch('/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(() => {
-                    // Redirecionar para a página inicial
-                    window.location.href = "/";
-                });
-            } else {
-                // Exibir mensagem de erro
-                alert("Login ou senha inválidos!");
-            }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao tentar fazer login.");
-        });
-    });
-</script>
+</div>

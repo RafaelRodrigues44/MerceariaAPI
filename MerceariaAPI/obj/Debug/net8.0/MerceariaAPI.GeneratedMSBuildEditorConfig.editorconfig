@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Auth/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

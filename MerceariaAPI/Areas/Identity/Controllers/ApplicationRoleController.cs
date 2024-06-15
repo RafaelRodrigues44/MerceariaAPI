@@ -1,5 +1,6 @@
 using MerceariaAPI.Areas.Identity.Models;
 using MerceariaAPI.Areas.Identity.Repositories.Role;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ApplicationRoleController : ControllerBase
     {
         private readonly IRoleRepository _roleRepository;

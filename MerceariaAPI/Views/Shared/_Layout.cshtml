@@ -5,144 +5,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewData["Title"] - MerceariaAPI</title>
     <style>
+        /* Estilos gerais */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
+        /* Estilos do cabeçalho */
         .header {
-            background-color: #333;
+            background-color: #000;
             color: #fff;
-            padding: 10px 20px;
+            padding: 20px;
             text-align: center;
-        }
-        .sidebar {
-            background-color: #343a40;
-            color: #fff;
-            width: 200px;
-            height: 100%;
             position: fixed;
             top: 0;
             left: 0;
-            padding-top: 56px;
+            width: 100%;
+            z-index: 1000;
         }
-        .sidebar h2 {
-            padding-left: 20px;
-            margin-bottom: 10px;
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
         }
-        .menu-item {
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            border-radius: 20px;
-            width: 120px;
-            margin-left: 20px;
-        }
-        .menu-item:hover {
-            background-color: #495057;
-        }
-        .submenu {
-            display: none;
-            background-color: #495057;
-            position: absolute;
-            top: 50px;
-            left: 100%;
-            width: 150px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-        }
-        .submenu a {
-            display: block;
+        .header a {
             color: #fff;
-            padding: 10px 20px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            margin-left: 20px;
+            font-size: 18px;
         }
-        .submenu a:hover {
-            background-color: #6c757d;
+        /* Estilos da barra de navegação */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            position: fixed;
+            margin-left: 390px;
+            top: 62px; 
+            width: 50%; 
+            z-index: 999;
+            text-align: center;
+            border-radius: 5px; 
+        }
+        .navbar a {
+            display: inline-block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+            transition: background-color 0.3s;
+            border-radius: 5px; /* Adiciona borda arredondada */
+        }
+        .navbar a:hover {
+            background-color: #7d7b7b;
+            color: black;
+        }
+        /* Estilos dos dropdowns */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left: 0;
+            border-radius: 5px; 
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-size: 12px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Estilos do conteúdo principal */
+        .content { 
+            padding: 20px;
+            color: #fff;
+        }
+        .content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Estilo para a página index */
+        .index-background {
+            background-image: url('https://www.yaycork.ie/wp-content/uploads/2020/03/is-the-english-market-open--scaled-e1585213901217.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+
+        /* Estilo para a mensagem de boas-vindas */
+        .welcome {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            color: rgb(206, 205, 205);
+        }
+
+        /* Estilos do rodapé */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
         }
     </style>
+    @RenderSection("Styles", required: false) <!-- Renderiza a seção Styles se estiver definida -->
 </head>
-<body>
-    <!-- Cabeçalho (Header) -->
+<body class="@ViewData["PageClass"]"> <!-- Adiciona classe dinâmica para controlar o estilo -->
+    <!-- Cabeçalho -->
     <div class="header">
         <h1>MerceariaAPI</h1>
-        <!-- Botão Home -->
-        <a href="/" style="color: #fff; text-decoration: none;">Home</a>
+    </div>
 
-        @if (Context.Session.GetString("Username") != null){
-           <p>Bem-vindo, @Context.Session.GetString("Username")!</p>
+    <!-- Barra de navegação -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        
+        <!-- Dropdown Tipo de Produto -->
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Tipo de Produto 
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="dropdown-content">
+                <a href="/TipoProduto/List">Listar</a>
+                <a href="/TipoProduto/Create">Adicionar</a>
+            </div>
+        </div>
+        
+        <!-- Dropdown Produto -->
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Produto 
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="dropdown-content">
+                <a href="/Produto/List">Listar</a>
+                <a href="/Produto/Create">Adicionar</a>
+            </div>
+        </div>
+        
+        <!-- Dropdown Cargo -->
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Cargo 
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="dropdown-content">
+                <a href="/TypeUser/List">Listar</a>
+                <a href="/TypeUser/Create">Adicionar</a>
+            </div>
+        </div>
+        
+        <!-- Dropdown Usuário -->
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Usuário 
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="dropdown-content">
+                <a href="/User/List">Listar</a>
+                <a href="/User/Create">Adicionar</a>
+            </div>
+        </div>
+        
+        <!-- Verificação de sessão para exibir opções de login/logout -->
+        @if (Context.Session.GetString("Username") == null)
+        {
+            <a href="/api/Auth/login">Login</a>
+        }
+        else
+        {
+            <a href="/api/Auth/logout">Logout</a>
+        }
+        <!-- Exibir mensagem de boas-vindas se o usuário estiver logado -->
+        @if (Context.Session.GetString("Username") != null)
+        {
+           <p class="welcome">Bem-vindo, @Context.Session.GetString("Username")!</p>
         }
     </div>
 
-    <!-- Barra lateral (Sidebar) -->
-    <div class="sidebar">
-        <h2>Menu</h2>
-        <!-- Botões com Submenus -->
-        <div class="menu-item" onclick="toggleSubMenu('submenu1')">Tipo de Produto</div>
-        <div class="submenu" id="submenu1">
-            <a href="/TipoProduto/List">Listar</a>
-            <a href="/TipoProduto/Create">Adicionar</a>
-        </div>
-
-        <div class="menu-item" onclick="toggleSubMenu('submenu2')">Produto</div>
-        <div class="submenu" id="submenu2">
-            <a href="/Produto/List">Listar</a>
-            <a href="/Produto/Create">Adicionar</a>
-        </div>
-
-        <div class="menu-item" onclick="toggleSubMenu('submenu4')">Cargo</div>
-        <div class="submenu" id="submenu4">
-            <a href="/TypeUser/List">Listar</a>
-            <a href="/TypeUser/Create">Adicionar</a>
-        </div>
-
-        <div class="menu-item" onclick="toggleSubMenu('submenu5')">Usuário</div>
-        <div class="submenu" id="submenu5">
-            <a href="/User/List">Listar</a>
-            <a href="/User/Create">Adicionar</a>
-        
-        </div>
-            @if (Context.Session.GetString("Username") == null)
-            {
-                <!-- Usuário não está logado -->
-                <div class="menu-item" onclick="toggleSubMenu('submenu6')">Minha Conta</div>
-                <div class="submenu" id="submenu6">
-                    <a href='api/Auth/login'>Login</a> <!-- Link para a página de login -->
-                </div>
-            }
-            else
-            {
-                <!-- Usuário está logado -->
-                <div class="menu-item" onclick="toggleSubMenu('submenu6')">Minha Conta</div>
-                <div class="submenu" id="submenu6">
-                    <a href='/api/Auth/logout'>Logout</a> <!-- Link para o endpoint de logout -->
-                </div>
-            }
-        </div>
 
     <!-- Conteúdo Principal -->
-    <div style="margin-left: 250px; padding: 20px;">
+    <div class="content @ViewData["ContentClass"]">
         <!--  Conteúdo específico de cada página -->
         @RenderBody()
     </div>
 
-    <!-- Rodapé (Footer) -->
-    <div style="background-color: #333; color: #fff; padding: 10px; position: fixed; bottom: 0; width: 100%; text-align: center;">
+    <!-- Rodapé -->
+    <div class="footer">
         &copy; 2024 Senai Gaspar Ricardo Júnior. Todos os direitos reservados.
     </div>
 
-    <!-- Adicione os scripts JavaScript aqui -->
-    <script>
-        function toggleSubMenu(submenuId) {
-            var submenu = document.getElementById(submenuId);
-            if (submenu.style.display === "block") {
-                submenu.style.display = "none";
-            } else {
-                submenu.style.display = "block";
-            }
-        }
-    </script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false) <!-- Renderiza a seção Scripts se estiver definida -->
 </body>
 </html>
