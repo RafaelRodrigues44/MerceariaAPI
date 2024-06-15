@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace MerceariaAPI.Controllers
 {
     [Route("Produto")]
-    [Authorize]
+  
     public class ProdutoController : Controller
     {
         private readonly AppDbContext _context;

@@ -78,10 +78,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/GetById.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcR2V0QnlJZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -96,10 +92,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/GetById.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxHZXRCeUlkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/List.cshtml]

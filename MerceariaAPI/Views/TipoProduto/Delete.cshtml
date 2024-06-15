@@ -3,28 +3,94 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Delete Tipo de Produto</h2>
 
-<p>Tem certeza de que deseja excluir?</p>
-<div>
-    <h4>Tipo de Produto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-    </dl>
+@section Styles {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://citybreakinfo.com/pix/2018-07/1532261860269744-1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ede9e9; /* Texto branco */
+        }
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+        .delete-container {
+            width: 300px;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.5); 
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(50, 49, 49, 0.1);
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            margin-top: 200px;
+            text-align: center;
+            margin-left: 550px;
+        }
 
-        <div class="form-actions">
-            <input type="submit" value="Delete" class="btn btn-default" />
-            @Html.ActionLink("Cancelar", "List")
-        </div>
-    }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-default {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #376c49;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .btn-default:hover {
+            background-color: #94be86;
+        }
+
+        a {
+            display: inline-block;
+            text-align: center;
+            color: #ede9e9;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+}
+
+<div class="delete-container">
+    <p>Tem certeza de que deseja excluir?</p>
+    <div>
+        <h4>Tipo de Produto</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions">
+                <input type="submit" value="Delete" class="btn btn-default" />
+                @Html.ActionLink("Cancelar", "List")
+            </div>
+        }
+    </div>
 </div>
