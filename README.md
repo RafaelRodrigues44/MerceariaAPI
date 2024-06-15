@@ -1,8 +1,6 @@
 # MerceariaAPI
 
-## Escopo do Projeto
-
-### Visão Geral do Sistema
+## Visão Geral do Sistema
 
 O projeto consiste no desenvolvimento de uma API Restful para o gerenciamento de produtos e usuários, especificamente voltada para o contexto de uma mercearia ou minimercado.
 
