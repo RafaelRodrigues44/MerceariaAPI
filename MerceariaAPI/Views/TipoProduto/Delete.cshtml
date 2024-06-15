@@ -13,24 +13,20 @@
             background-position: center;
             background-repeat: no-repeat;
             height: 100vh;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #ede9e9; /* Texto branco */
+            color: #ede9e9;
         }
 
         .delete-container {
             width: 300px;
             padding: 30px;
-            background-color: rgba(0, 0, 0, 0.5); 
+            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
             box-shadow: 0px 0px 20px rgba(50, 49, 49, 0.1);
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
-            margin-top: 200px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 250px auto; 
             text-align: center;
-            margin-left: 550px;
         }
 
         .form-group {
@@ -55,29 +51,33 @@
             background-color: #94be86;
         }
 
-        a {
+        .btn-cancel {
             display: inline-block;
-            text-align: center;
-            color: #ede9e9;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #9a2525;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
             text-decoration: none;
+            text-align: center;
             margin-top: 10px;
+            width: 60px;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .btn-cancel:hover {
+            background-color: #cc7171;
         }
     </style>
 }
 
 <div class="delete-container">
-    <p>Tem certeza de que deseja excluir?</p>
+    <p>Tem certeza de que deseja excluir esse Tipo de Produto?</p>
     <div>
-        <h4>Tipo de Produto</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Nome)
-            </dt>
             <dd>
                 @Html.DisplayFor(model => model.Nome)
             </dd>
@@ -89,7 +89,7 @@
 
             <div class="form-actions">
                 <input type="submit" value="Delete" class="btn btn-default" />
-                @Html.ActionLink("Cancelar", "List")
+                <a href="@Url.Action("List")" class="btn-cancel">Cancelar</a>
             </div>
         }
     </div>
