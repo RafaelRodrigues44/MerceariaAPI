@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\rafae\\OneDrive\\Desktop\\MerceariaAPI\\MerceariaAPI\\wwwroot\\ok.jpg",
+      "PackagePath": "staticwebassets\\ok.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MerceariaAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.MerceariaAPI.props",
+      "PackagePath": "build\\MerceariaAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.MerceariaAPI.props",
+      "PackagePath": "buildMultiTargeting\\MerceariaAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.MerceariaAPI.props",
+      "PackagePath": "buildTransitive\\MerceariaAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
