@@ -155,7 +155,7 @@ Abstração da lógica de acesso a dados, facilitando a manutenção e a testabi
      dotnet run
      ```
 
-   - A aplicação será iniciada localmente em `http://localhost:5000` (ou `https://localhost:5001` com HTTPS).
+   - A aplicação será iniciada localmente em `http://localhost:5247` (ou `https://localhost:7017` com HTTPS).
 
 6. **Testando a Aplicação**
    - Use ferramentas como Postman, Insomnia ou um navegador para enviar requisições HTTP aos endpoints da API.
