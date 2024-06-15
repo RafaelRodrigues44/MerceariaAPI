@@ -9,95 +9,95 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MerceariaAPI
 build_property.RootNamespace = MerceariaAPI
-build_property.ProjectDir = C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI\
+build_property.ProjectDir = C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = true
-build_property.MSBuildProjectDirectory = C:\Users\Rafael Rodrigues\Desktop\MerceariaAPI\MerceariaAPI
+build_property.MSBuildProjectDirectory = C:\Users\rafae\OneDrive\Desktop\MerceariaAPI\MerceariaAPI
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Auth/Login.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Home/Index.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Produto/Create.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Produto/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Produto/Delete.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Produto/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Produto/Edit.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Produto/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Produto/List.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Produto/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/Shared/_Layout.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/Create.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1dG9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/Delete.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1dG9cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/Edit.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1dG9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/List.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TipoProduto/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1dG9cTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Create.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Delete.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Edit.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/GetById.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/GetById.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcR2V0QnlJZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/List.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/TypeUser/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVVzZXJcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Create.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Delete.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Edit.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/User/GetById.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/GetById.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxHZXRCeUlkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Rafael Rodrigues/Desktop/MerceariaAPI/MerceariaAPI/Views/User/List.cshtml]
+[C:/Users/rafae/OneDrive/Desktop/MerceariaAPI/MerceariaAPI/Views/User/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
