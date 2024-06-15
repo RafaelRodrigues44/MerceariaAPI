@@ -4,34 +4,96 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Excluir Usuário</h2>
+@section Styles {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://citybreakinfo.com/pix/2018-07/1532261860269744-1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ede9e9; /* Texto branco */
+        }
 
-<p>Tem certeza de que deseja excluir o usuário:</p>
-<div>
-    <h4>Usuário</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TypeUser)
-        </dd>
-    </dl>
+        .delete-container {
+            width: 300px;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.5); 
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(50, 49, 49, 0.1);
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            margin-top: 150px;
+        }
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+        .form-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-        <div class="form-actions">
-            <input type="submit" value="Excluir" class="btn btn-default" />
-            @Html.ActionLink("Cancelar", "List")
-        </div>
-    }
+        button[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #c9302c;
+        }
+
+        .cancel-link {
+            display: block;
+            text-align: center;
+            color: #ede9e9;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .cancel-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+}
+
+<div class="delete-container">
+    <h2>Excluir Usuário</h2>
+
+    <div>
+        <h4>Usuário</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions">
+                <input type="submit" value="Excluir" class="btn btn-default" />
+                @Html.ActionLink("Cancelar", "List", null, new { @class = "cancel-link" })
+            </div>
+        }
+    </div>
 </div>

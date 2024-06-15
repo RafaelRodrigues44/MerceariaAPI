@@ -44,7 +44,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return View("/Views/Auth/Login.cshtml");
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             if (!ModelState.IsValid)
@@ -109,15 +109,16 @@ namespace MerceariaAPI.Areas.Identity.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        [HttpGet("logout")]
+        [HttpGet("Logout")]
         [Authorize]
         public async Task<IActionResult> Logout()
         {
             try
             {
-                var username = User.Identity.Name; // Obtém o nome do usuário atualmente autenticado
+                var username = User.Identity.Name; 
                 
-                await _signInManager.SignOutAsync(); // Realiza o logout do usuário
+                await _signInManager.SignOutAsync(); 
+                
                 
                 // Limpa a sessão
                 HttpContext.Session.Clear();
@@ -135,6 +136,13 @@ namespace MerceariaAPI.Areas.Identity.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpGet("AccessDenied")]
+        public IActionResult AccessDenied()
+        {
+            return View("~/Views/Auth/AccessDenied.cshtml");
+        }
+
     }
 
     public class LoginModel
@@ -149,4 +157,3 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         public string Username { get; set; }
     }
 }
-

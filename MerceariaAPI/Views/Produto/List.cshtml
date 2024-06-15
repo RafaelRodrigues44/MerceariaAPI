@@ -4,33 +4,117 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista de Produtos</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>TipoProdutoId</th>
-            <th>Descrição</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Nome</td>
-                <td>@item.TipoProdutoId</td>
-                <td>@item.Descricao</td>
-                <td>
-                    <a href="/Produto/Edit/@item.Id">Editar</a> |
-                    <a href="/Produto/Delete/@item.Id">Excluir</a>
-                </td>
-            </tr>
+@section Styles {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://citybreakinfo.com/pix/2018-07/1532261860269744-1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
         }
-    </tbody>
-</table>
 
-<a href="/Produto/Create">Adicionar</a>
+        .content-container {
+            width: 50%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(50, 49, 49, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 200px;
+            margin-left: 350px
+        }
+
+        h2 {
+            text-align: center;
+            color: #ede9e9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+            color: #ede9e9;
+        }
+
+        th {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        a {
+            color: #94be86;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #376c49;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background-color: #94be86;
+        }
+    </style>
+}
+
+<div class="content-container">
+    <h2>Lista de Produtos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>TipoProdutoId</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nome</td>
+                    <td>@item.TipoProdutoId</td>
+                    <td>@item.Descricao</td>
+                    <td>
+                        <a href="/Produto/Edit/@item.Id">Editar</a> |
+                        <a href="/Produto/Delete/@item.Id">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Produto/Create" class="btn btn-primary">Adicionar</a>
+</div>

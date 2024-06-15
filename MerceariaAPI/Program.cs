@@ -64,6 +64,26 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = key
     };
+    options.Events = new JwtBearerEvents
+    {
+        OnChallenge = context =>
+        {
+            // Evita o redirecionamento automático para a página de login padrão do browser
+            context.HandleResponse();
+            if (!context.Response.HasStarted)
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                context.Response.Redirect("/api/Auth/AccessDenied");
+            }
+            return Task.CompletedTask;
+        },
+        OnForbidden = context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            context.Response.Redirect("/api/Auth/AccessDenied");
+            return Task.CompletedTask;
+        }
+    };
 });
 
 builder.Services.AddLogging(logging =>
@@ -116,6 +136,21 @@ app.Use(async (context, next) =>
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Adicionar middleware para tratar exceções de autorização
+app.Use(async (context, next) =>
+{
+    await next.Invoke();
+
+    if (context.Response.StatusCode == StatusCodes.Status401Unauthorized)
+    {
+        context.Response.Redirect("/api/Auth/AccessDenied");
+    }
+    else if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
+    {
+        context.Response.Redirect("/api/Auth/AccessDenied");
+    }
+});
 
 // Adicionando a configuração para carregar a view index.html ao acessar o root da aplicação
 app.MapControllerRoute(

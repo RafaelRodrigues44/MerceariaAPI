@@ -3,10 +3,12 @@ using MerceariaAPI.Areas.Identity.Repositories.User;
 using MerceariaAPI.Areas.Identity.Repositories.Type;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
     [Route("User")]
+    [Authorize]
     public class ApplicationUserController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -25,6 +27,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpPost("Create")]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateUser(ApplicationUser model)
         {
             if (ModelState.IsValid)

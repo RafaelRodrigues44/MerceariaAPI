@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MerceariaAPI.Data;
 using MerceariaAPI.Areas.Identity.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
@@ -18,6 +19,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         // GET: /TypeUser/List
+        [Authorize]
         public async Task<IActionResult> List()
         {
             var typeUsers = await _context.TypeUsers.ToListAsync();
@@ -25,6 +27,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         // GET: /TypeUser/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -32,6 +35,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 
         // POST: /TypeUser/Create
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Nome")] TypeUser typeUser)
         {
             if (ModelState.IsValid)
@@ -44,6 +48,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         // GET: /TipoProduto/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -61,6 +66,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 
         // POST: /TipoProduto/Edit/5
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] TypeUser typeUser)
         {
             if (id != typeUser.Id)
@@ -92,6 +98,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         // GET: /TypeUser/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -110,6 +117,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
 
         // POST: /TypeUser/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var typeUser = await _context.TypeUsers.FindAsync(id);

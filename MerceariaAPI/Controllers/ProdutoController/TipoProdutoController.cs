@@ -1,13 +1,16 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MerceariaAPI.Data;
 using MerceariaAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MerceariaAPI.Controllers
 {
+    [Route("TipoProduto")]
+    [Authorize]
     public class TipoProdutoController : Controller
     {
         private readonly AppDbContext _context;
@@ -18,49 +21,47 @@ namespace MerceariaAPI.Controllers
         }
 
         // GET: /TipoProduto/List
+        [HttpGet("List")]
         public async Task<IActionResult> List()
         {
             var tipoProdutos = await _context.TipoProdutos.ToListAsync();
-            return View("/Views/TipoProduto/List.cshtml", tipoProdutos);
+            return View("List", tipoProdutos); // View está na pasta Views/TipoProduto/List.cshtml
         }
 
         // GET: /TipoProduto/Create
+        [HttpGet("Create")]
         public IActionResult Create()
         {
-            return View();
+            return View(); // View está na pasta Views/TipoProduto/Create.cshtml
         }
 
         // POST: /TipoProduto/Create
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create([Bind("Id,Nome")] TipoProduto tipoProduto)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(tipoProduto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(List)); // Redireciona para a action List após a criação
             }
-            return View("/Views/TipoProduto/Create.cshtml", tipoProduto);
+            return View("Create", tipoProduto); // Retorna a view de criação com o modelo em caso de erro
         }
 
         // GET: /TipoProduto/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet("Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var tipoProduto = await _context.TipoProdutos.FindAsync(id);
             if (tipoProduto == null)
             {
                 return NotFound();
             }
-            return View("/Views/TipoProduto/Edit.cshtml", tipoProduto);
+            return View("Edit", tipoProduto); // View está na pasta Views/TipoProduto/Edit.cshtml
         }
 
         // POST: /TipoProduto/Edit/5
-        [HttpPost]
+        [HttpPost("Edit/{id}")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] TipoProduto tipoProduto)
         {
             if (id != tipoProduto.Id)
@@ -86,38 +87,38 @@ namespace MerceariaAPI.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(List)); // Redireciona para a action List após a edição
             }
-            return View("/Views/TipoProduto/List.cshtml");
+            return View("Edit", tipoProduto); // Retorna a view de edição com o modelo em caso de erro
         }
 
         // GET: /TipoProduto/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpGet("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var tipoProduto = await _context.TipoProdutos.FindAsync(id);
             if (tipoProduto == null)
             {
                 return NotFound();
             }
 
-            return View("/Views/TipoProduto/Delete.cshtml", tipoProduto);
+            return View("Delete", tipoProduto); // View está na pasta Views/TipoProduto/Delete.cshtml
         }
 
         // POST: /TipoProduto/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("Delete/{id}")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tipoProduto = await _context.TipoProdutos.FindAsync(id);
-            #pragma warning disable CS8604 
+            if (tipoProduto == null)
+            {
+                return NotFound();
+            }
+
             _context.TipoProdutos.Remove(tipoProduto);
-            #pragma warning restore CS8604 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(List));
+            return RedirectToAction(nameof(List)); // Redireciona para a action List após a exclusão
         }
 
         private bool TipoProdutoExists(int id)
