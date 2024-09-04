@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace MerceariaAPI.Areas.Identity.Controllers
 {
     [Route("User")]
-    [Authorize]
+    [AllowAnonymous] 
     public class ApplicationUserController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -21,6 +21,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpGet("Create")]
+        [AllowAnonymous] 
         public IActionResult CreateUser()
         {
             return View("/Views/User/Create.cshtml");
@@ -68,6 +69,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpGet("List")]
+        [Authorize]
         public async Task<IActionResult> List()
         {
             var users = await _userRepository.GetUsers();
@@ -75,6 +77,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpGet("Edit/{id}")]
+        [Authorize]
         public async Task<IActionResult> Edit(string id)
         {
             var user = await _userRepository.GetUserById(id);
@@ -86,6 +89,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpPost("Edit/{id}")]
+        [Authorize]
         public async Task<IActionResult> Edit(string id, ApplicationUser model)
         {
             if (ModelState.IsValid)
@@ -108,6 +112,7 @@ namespace MerceariaAPI.Areas.Identity.Controllers
         }
 
         [HttpGet("Delete/{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
             var user = await _userRepository.GetUserById(id);
